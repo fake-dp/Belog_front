@@ -24,11 +24,12 @@ const ModalContent = styled.div`
   align-items: center;
 `;
 
-const AuthModal = () => {
+const AuthModal = ({ setShowModal }) => {
   return (
     <ModalWrapper>
       <ModalContent>
         <h1>AuthModal</h1>
+        <button onClick={() => setShowModal(false)}>닫기</button>
       </ModalContent>
     </ModalWrapper>
   );
