@@ -1,62 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 import { useState } from "react";
-import axois from "axios";
-const ModalWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContent = styled.div`
-  width: 400px;
-  height: 400px;
-  background-color: white;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FormStyle = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  > input {
-    box-sizing: border-box;
-    width: 300px;
-    height: 40px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 0 10px;
-  }
-  > button {
-    width: 300px;
-    height: 40px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 0 10px;
-    background-color: #fff;
-    cursor: pointer;
-  }
-`;
-
+import * as S from "../../styles/AuthModalStyled";
+import swal from "sweetalert";
+import authApi from "../../api/authApi";
+import styled from "styled-components";
 const AuthModal = ({ setShowModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nickName, setnickName] = useState("");
   const [newAccount, setNewAccount] = useState(false);
-  const [error, setError] = useState("");
 
   const onChange = (event) => {
     const {
@@ -77,51 +29,50 @@ const AuthModal = ({ setShowModal }) => {
     event.preventDefault();
 
     if (newAccount) {
-      const data = await axois
-        .post(
-          "http://3.34.53.11:8080/member-service/api/v1/members",
-          {
-            email,
-            password,
-            nickName,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        )
+      const data = await authApi
+        .register({
+          email,
+          password,
+          nickName,
+        })
         .then((response) => {
-          console.log(response);
+          const { data } = response;
+          console.log(data);
+          swal(data.result.status, data.result.message, "success");
+          setNewAccount(false);
         })
         .catch((error) => {
-          console.log(error);
+          const { data } = error.response;
+          swal(data.result.status, data.result.message, "error");
         });
-      console.log(data);
     } else {
-      const data = await axois
-        .post("http://3.34.53.11:8080/auth-service/login", {
+      const data = await authApi
+        .login({
           email,
           password,
         })
         .then((response) => {
-          console.log(response);
+          const { data } = response;
+          console.log(data);
+          localStorage.setItem("access_token", data.body.accessToken);
+          localStorage.setItem("member_id", data.body.memberId);
+          swal(data.result.status, data.result.message, "success");
+          setShowModal(false);
         })
         .catch((error) => {
-          console.log(error);
+          const { data } = error.response;
+          swal(data.result.status, data.result.message, "error");
         });
-      console.log(data);
     }
   };
 
   const toggleAccount = () => setNewAccount((prev) => !prev);
 
   return (
-    <ModalWrapper>
-      <ModalContent>
+    <S.ModalWrapper>
+      <S.ModalContent>
         <h1>{newAccount ? "회원가입" : "로그인"}</h1>
-        <FormStyle onSubmit={onSubmit}>
+        <S.FormStyle onSubmit={onSubmit}>
           <input
             name="email"
             type="email"
@@ -130,6 +81,7 @@ const AuthModal = ({ setShowModal }) => {
             value={email}
             onChange={onChange}
           />
+
           <input
             name="password"
             type="password"
@@ -138,25 +90,30 @@ const AuthModal = ({ setShowModal }) => {
             value={password}
             onChange={onChange}
           />
+
           {newAccount && (
-            <input
-              name="nickName"
-              type="text"
-              placeholder="닉네임"
-              required
-              value={nickName}
-              onChange={onChange}
-            />
+            <>
+              <input
+                name="nickName"
+                type="text"
+                placeholder="닉네임"
+                required
+                value={nickName}
+                onChange={onChange}
+              />
+            </>
           )}
 
           <button type="submit">{newAccount ? "회원가입" : "로그인"}</button>
-        </FormStyle>
-        <span onClick={toggleAccount}>
-          {newAccount ? "로그인하기" : "회원가입하기"}
-        </span>
-        <button onClick={() => setShowModal(false)}>닫기</button>
-      </ModalContent>
-    </ModalWrapper>
+        </S.FormStyle>
+        <S.SpanWrapper>
+          <S.SpanText onClick={toggleAccount}>
+            {newAccount ? "로그인하기" : "회원가입하기"}
+          </S.SpanText>
+        </S.SpanWrapper>
+        <S.CloseButton onClick={() => setShowModal(false)}>닫기</S.CloseButton>
+      </S.ModalContent>
+    </S.ModalWrapper>
   );
 };
 
