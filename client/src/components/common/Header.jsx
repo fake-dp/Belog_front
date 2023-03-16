@@ -4,13 +4,41 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AuthModal from "../auth/AuthModal";
 import styled from "styled-components";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { loginState } from "../../recoil/atom";
+
 const Header = () => {
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
+  console.log("@@@@@@", isLogin);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLogin({
+        isLogin: true,
+        memberId: localStorage.getItem("member_id"),
+      });
+    }
+  }, [isLogin]);
+
   const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
 
   const goEditPage = () => {
     navigate("/edit");
+  };
+
+  const logoutBtn = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("member_id");
+    localStorage.removeItem("access_token");
+    setIsLogin({
+      isLogin: false,
+      memberId: null,
+    });
+    navigate("/");
   };
 
   return (
@@ -20,7 +48,14 @@ const Header = () => {
       </div>
       <HeaderRight>
         <p onClick={goEditPage}>글쓰기</p>
-        <p onClick={() => setShowModal(true)}>Login</p>
+        {isLogin.isLogin ? (
+          <>
+            <LinkStyle to="/mypage">MyPage</LinkStyle>
+            <p onClick={logoutBtn}>Logout</p>
+          </>
+        ) : (
+          <p onClick={() => setShowModal(true)}>Login</p>
+        )}
       </HeaderRight>
       {showModal && <AuthModal setShowModal={setShowModal} />}
     </HeaderWrapper>

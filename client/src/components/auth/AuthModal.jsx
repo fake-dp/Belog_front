@@ -3,12 +3,16 @@ import { useState } from "react";
 import * as S from "../../styles/AuthModalStyled";
 import swal from "sweetalert";
 import authApi from "../../api/authApi";
-import styled from "styled-components";
+// recoil import
+import { useRecoilState } from "recoil";
+import { loginState } from "../../recoil/atom";
 const AuthModal = ({ setShowModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nickName, setnickName] = useState("");
   const [newAccount, setNewAccount] = useState(false);
+
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
 
   const onChange = (event) => {
     const {
@@ -58,6 +62,10 @@ const AuthModal = ({ setShowModal }) => {
           localStorage.setItem("member_id", data.body.memberId);
           swal(data.result.status, data.result.message, "success");
           setShowModal(false);
+          setIsLogin({
+            isLogin: true,
+            memberId: localStorage.getItem("member_id"),
+          });
         })
         .catch((error) => {
           const { data } = error.response;
