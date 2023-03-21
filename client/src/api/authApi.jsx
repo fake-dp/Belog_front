@@ -19,6 +19,11 @@ const authApi = {
     });
     return data;
   },
+  logout: async ({ memberId }) => {
+    const data = instance.post(`${BASEURL}/auth-service/logout`, { memberId });
+    return data;
+  },
+
   emailCheck: () => {
     return instance.post(
       `${BASEURL}/member-service/api/v1/members/check/email`
