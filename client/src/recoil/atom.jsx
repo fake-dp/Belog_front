@@ -7,3 +7,8 @@ export const loginState = atom({
     memberId: null,
   },
 });
+
+export const MarkdownState = atom({
+  key: "MarkDate",
+  default: "",
+});

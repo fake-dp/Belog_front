@@ -1,13 +1,22 @@
 import React from "react";
+import { Viewer } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+
+import { useRecoilValue } from "recoil";
+import { MarkdownState } from "../recoil/atom";
+
 import styled from "styled-components";
 const MainPage = () => {
-  return <MainPageWrapper>MainPage</MainPageWrapper>;
+  const markdown = useRecoilValue(MarkdownState);
+
+  return (
+    <EditorWrapper>
+      <Viewer initialValue={markdown || ""} />
+    </EditorWrapper>
+  );
 };
 
 export default MainPage;
-
-const MainPageWrapper = styled.div`
+const EditorWrapper = styled.div`
   margin-top: 60px;
-  background-color: #f1f3f5;
-  height: 100vh;
 `;

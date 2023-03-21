@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import mypageApi from "../api/mypageApi";
 import styled from "styled-components";
+
 const MyPage = () => {
   const [data, setData] = useState(null);
 

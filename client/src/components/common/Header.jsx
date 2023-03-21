@@ -10,7 +10,6 @@ import { loginState } from "../../recoil/atom";
 
 const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
-  console.log("@@@@@@", isLogin);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -47,9 +46,9 @@ const Header = () => {
         <LinkStyle to="/">Winter Blog</LinkStyle>
       </div>
       <HeaderRight>
-        <p onClick={goEditPage}>글쓰기</p>
         {isLogin.isLogin ? (
           <>
+            <WritePtag onClick={goEditPage}>글쓰기</WritePtag>
             <LinkStyle to="/mypage">MyPage</LinkStyle>
             <p onClick={logoutBtn}>Logout</p>
           </>
@@ -84,8 +83,9 @@ const HeaderRight = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 200px;
+  /* width: 200px; */
   > P {
+    margin: 20px;
     font-size: 20px;
     font-weight: 600;
   }
@@ -96,4 +96,14 @@ const LinkStyle = styled(Link)`
   color: #000;
   font-size: 20px;
   font-weight: 600;
+`;
+
+const WritePtag = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: red;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 20px;
 `;

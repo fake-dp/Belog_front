@@ -1,7 +1,29 @@
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import styled from "styled-components";
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+import "tui-color-picker/dist/tui-color-picker.css";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "@toast-ui/editor/dist/i18n/ko-kr";
+import { useRef } from "react";
+import { useRecoilState } from "recoil";
+import { MarkdownState } from "../../recoil/atom";
+
 const EditMarkdown = () => {
+  const editorRef = useRef();
+
+  const [markdown, setMarkdown] = useRecoilState(MarkdownState);
+
+  const onChange = () => {
+    const data = editorRef.current.getInstance().getHTML();
+    console.log(data);
+    setMarkdown(data);
+  };
+
+  const onSubmit = () => {
+    console.log(markdown);
+  };
+
   return (
     <EditorWrapper>
       <Editor
@@ -9,8 +31,13 @@ const EditMarkdown = () => {
         previewStyle="vertical"
         height="80vh"
         initialEditType="markdown"
-        useCommandShortcut={true}
+        useCommandShortcut={false}
+        plugins={[colorSyntax]}
+        ref={editorRef}
+        language="ko-KR"
+        onChange={onChange}
       />
+      <button onClick={onSubmit}>제출하기</button>
     </EditorWrapper>
   );
 };
