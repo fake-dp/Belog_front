@@ -1,22 +1,12 @@
 import React from "react";
-import { Viewer } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
-import { useRecoilValue } from "recoil";
-import { MarkdownState } from "../recoil/atom";
-
-import styled from "styled-components";
 const MainPage = () => {
-  const markdown = useRecoilValue(MarkdownState);
-
   return (
-    <EditorWrapper>
-      <Viewer initialValue={markdown || ""} />
-    </EditorWrapper>
+    <div>
+      <h1>메인페이지</h1>
+      <p>test</p>
+    </div>
   );
 };
 
 export default MainPage;
-const EditorWrapper = styled.div`
-  margin-top: 60px;
-`;

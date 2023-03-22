@@ -50,7 +50,6 @@ export default MyInfoHeader;
 const MyPageWrapper = styled.div`
   margin-top: 60px;
   background-color: #f1f3f5;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

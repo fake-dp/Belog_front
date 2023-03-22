@@ -21,6 +21,11 @@ export const ModalContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  > h1 {
+    color: #999;
+    margin: 10px;
+    font-size: 20px;
+  }
 `;
 
 export const FormStyle = styled.form`

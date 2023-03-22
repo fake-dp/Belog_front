@@ -13,7 +13,7 @@ const AuthModal = ({ setShowModal }) => {
   const [newAccount, setNewAccount] = useState(false);
 
   const [isLogin, setIsLogin] = useRecoilState(loginState);
-
+  console.log(newAccount);
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -80,6 +80,7 @@ const AuthModal = ({ setShowModal }) => {
     <S.ModalWrapper>
       <S.ModalContent>
         <h1>{newAccount ? "회원가입" : "로그인"}</h1>
+
         <S.FormStyle onSubmit={onSubmit}>
           <input
             name="email"
