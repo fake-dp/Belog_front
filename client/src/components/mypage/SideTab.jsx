@@ -3,6 +3,7 @@ import { useState } from "react";
 import Introduction from "./Introduction";
 import MyPostList from "./MyPostList";
 import MyScrap from "./MyScrap";
+import styled from "styled-components";
 const SideTab = () => {
   const [tab, setTab] = useState({
     active: 0,
@@ -19,15 +20,41 @@ const SideTab = () => {
   };
 
   return (
-    <div>
-      <div>
+    <ContentsWrapper>
+      <TabWrapper>
         <li onClick={() => changeTabBtn(0)}>소개</li>
         <li onClick={() => changeTabBtn(1)}>작성한 글</li>
         <li onClick={() => changeTabBtn(2)}>스크랩</li>
-      </div>
+      </TabWrapper>
       <div>{objTab[tab.active]}</div>
-    </div>
+    </ContentsWrapper>
   );
 };
 
 export default SideTab;
+
+const TabWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: 100%;
+  background-color: #f1f3f5;
+  border-right: 1px solid #e9ecef;
+  li {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+    &:hover {
+      background-color: #e9ecef;
+    }
+  }
+`;
+
+const ContentsWrapper = styled.div`
+  display: flex;
+`;

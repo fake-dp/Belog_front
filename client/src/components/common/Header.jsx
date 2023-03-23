@@ -73,7 +73,10 @@ const Header = () => {
         {isLogin.isLogin ? (
           <>
             <WritePtag onClick={goEditPage}>글쓰기</WritePtag>
-            <InfoRound onClick={toggleMyInfo}></InfoRound>
+            <InfoRound
+              src="https://placeimg.com/200/200/people"
+              onClick={toggleMyInfo}
+            ></InfoRound>
             {showMyInfo && (
               <InfoMenuWrapper>
                 <p onClick={goMyPage}>마이페이지</p>
@@ -149,7 +152,7 @@ const WritePtag = styled.p`
   cursor: pointer;
 `;
 
-const InfoRound = styled.div`
+const InfoRound = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
