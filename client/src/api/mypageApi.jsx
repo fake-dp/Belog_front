@@ -8,6 +8,13 @@ const mypageApi = {
     const data = await instance.delete("/member-service/api/v1/members");
     return data;
   },
+  upLoadProfile: async ({ profile }) => {
+    const result = await instance.patch(
+      "/member-service/api/v1/members/upload-profile",
+      { profile }
+    );
+    return result;
+  },
   editInfo: async ({ nickName }) => {
     const result = await instance.patch(
       "/member-service/api/v1/members/edit-info",

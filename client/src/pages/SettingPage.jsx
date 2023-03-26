@@ -29,7 +29,7 @@ const SettingPage = () => {
   return (
     <>
       <SettingHeader info={info} />
-      <SettingList info={info} />
+      <SettingList info={info} setInfo={setInfo} />
     </>
   );
 };

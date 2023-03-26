@@ -5,12 +5,16 @@ import swal from "sweetalert";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { loginState } from "../../recoil/atom";
-import SettingInputModal from "./SettingInputModal";
+import {
+  EditNickNameModalInput,
+  EditPasswordModalInput,
+} from "./SettingInputModal";
 import { useState } from "react";
 
-const SettingList = ({ info }) => {
+const SettingList = ({ info, setInfo }) => {
   const navigate = useNavigate();
-  const [inputShowModal, setInputShowModal] = useState(false);
+  const [nickNameInputShowModal, setNickNameInputShowModal] = useState(false);
+  const [passwordInputSHowModal, setPasswordInputSHowModal] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(loginState);
 
   const deleteMemberBtn = async () => {
@@ -40,8 +44,12 @@ const SettingList = ({ info }) => {
     }
   };
 
-  const editShowModal = () => {
-    setInputShowModal(true);
+  const editNickNameShowModal = () => {
+    setNickNameInputShowModal(true);
+  };
+
+  const editPasswordShowModal = () => {
+    setPasswordInputSHowModal(true);
   };
 
   return (
@@ -63,7 +71,7 @@ const SettingList = ({ info }) => {
           <ListHeader>
             <h5>닉네임 변경</h5>
             <p>{info?.nickName}</p>
-            <EditPtag onClick={editShowModal}>변경하기</EditPtag>
+            <EditPtag onClick={editNickNameShowModal}>변경하기</EditPtag>
           </ListHeader>
           <div>
             <ListPtag>닉네임을 변경할 수 있습니다.</ListPtag>
@@ -73,7 +81,7 @@ const SettingList = ({ info }) => {
         <MySettingListContents>
           <ListHeader>
             <h5>비밀번호 변경</h5>
-            <EditPtag>변경하기</EditPtag>
+            <EditPtag onClick={editPasswordShowModal}>변경하기</EditPtag>
           </ListHeader>
           <div>
             <ListPtag>비밀번호를 변경할 수 있습니다.</ListPtag>
@@ -84,16 +92,23 @@ const SettingList = ({ info }) => {
           <DeleteBtn onClick={deleteMemberBtn}>회원탈퇴</DeleteBtn>
         </div>
       </MySettingListWrapper>
-      {inputShowModal && (
-        <SettingInputModal
-          inputShowModal={inputShowModal}
-          setInputShowModal={setInputShowModal}
+      {nickNameInputShowModal && (
+        <EditNickNameModalInput
+          nickNameInputShowModal={nickNameInputShowModal}
+          setNickNameInputShowModal={setNickNameInputShowModal}
+          info={info}
+          setInfo={setInfo}
+        />
+      )}
+      {passwordInputSHowModal && (
+        <EditPasswordModalInput
+          passwordInputSHowModal={passwordInputSHowModal}
+          setPasswordInputSHowModal={setPasswordInputSHowModal}
         />
       )}
     </>
   );
 };
-
 export default SettingList;
 
 export const MySettingListWrapper = styled.div`

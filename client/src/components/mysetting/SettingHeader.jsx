@@ -20,11 +20,11 @@ const SettingHeader = ({ info }) => {
           <label htmlFor="fileInput">이미지 업로드</label>
           <FileInput type="file" accept="image/*" />
           <button>이미지 제거</button>
+          <button>소개글 수정</button>
         </SettingHeaderWrapper>
         <EditInfoWrapper>
           <h1>{info?.nickName}</h1>
           <p>안녕하세요! 뭐뭐 입니다. 소개글입니다.</p>
-          <button>소개글 수정</button>
         </EditInfoWrapper>
       </ContentsWrapper>
     </MyPageWrapper>
