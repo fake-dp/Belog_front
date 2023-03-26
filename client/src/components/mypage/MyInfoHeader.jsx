@@ -22,15 +22,6 @@ const MyInfoHeader = () => {
     testBtn();
   }, []);
 
-  const deleteMemberBtn = async () => {
-    try {
-      const { data } = await mypageApi.deleteMember();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <MyPageWrapper>
       <ContentsWrapper>
@@ -39,7 +30,6 @@ const MyInfoHeader = () => {
         <p>닉네임: {data?.nickName}</p>
         <p>가입일: {data?.profiles[0].createdAt}</p>
         {/* 회원탈퇴 */}
-        <button onClick={deleteMemberBtn}>회원탈퇴</button>
       </ContentsWrapper>
     </MyPageWrapper>
   );

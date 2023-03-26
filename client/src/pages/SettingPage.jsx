@@ -10,7 +10,7 @@ const SettingPage = () => {
   const [info, setInfo] = useRecoilState(MyInfoState);
 
   console.log("@#!@#", info);
-  console.log("@#!@#@@@@@@@@@@@@@", info);
+
   useEffect(() => {
     const getMyInfo = async () => {
       try {

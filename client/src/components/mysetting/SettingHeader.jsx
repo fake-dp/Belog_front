@@ -16,15 +16,16 @@ const SettingHeader = ({ info }) => {
     <MyPageWrapper>
       <ContentsWrapper>
         <SettingHeaderWrapper>
-          <ImgStyle src="https://placeimg.com/200/200/people" />
-          <label htmlFor="fileInput">이미지 변경</label>
+          <ImgStyle src={info?.profiles[0].path} />
+          <label htmlFor="fileInput">이미지 업로드</label>
           <FileInput type="file" accept="image/*" />
           <button>이미지 제거</button>
         </SettingHeaderWrapper>
-        <div>
+        <EditInfoWrapper>
           <h1>{info?.nickName}</h1>
-          <p>소개글입니다.</p>
-        </div>
+          <p>안녕하세요! 뭐뭐 입니다. 소개글입니다.</p>
+          <button>소개글 수정</button>
+        </EditInfoWrapper>
       </ContentsWrapper>
     </MyPageWrapper>
   );
@@ -34,17 +35,17 @@ export default SettingHeader;
 
 export const MyPageWrapper = styled.div`
   margin-top: 60px;
-  background-color: #f1f3f5;
+  /* background-color: #f1f3f5; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px;
+  padding: 50px;
 `;
 
 export const ContentsWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  /* justify-content: center; */
+  width: 700px;
 `;
 
 export const SettingHeaderWrapper = styled.div`
@@ -62,4 +63,19 @@ export const ImgStyle = styled.img`
 
 export const FileInput = styled.input`
   display: none;
+`;
+
+export const EditInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  > h1 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  > p {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+  }
 `;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { instance } from "./instance";
 
-const BASEURL = "http://3.34.53.11:8080";
+const BASEURL = "http://3.39.159.26:8080";
 
 const authApi = {
   login: async ({ email, password }) => {
