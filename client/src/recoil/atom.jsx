@@ -27,3 +27,8 @@ export const MyInfoState = atom({
     ],
   },
 });
+
+export const PostListState = atom({
+  key: "PostListState",
+  default: [],
+});

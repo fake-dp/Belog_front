@@ -16,7 +16,7 @@ const EditMarkdown = () => {
 
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML();
-    console.log(data);
+    // console.log(data);
     setMarkdown(data);
   };
 
@@ -24,8 +24,15 @@ const EditMarkdown = () => {
     console.log(markdown);
   };
 
+  const onUploadImage = async (blob, callback) => {
+    // const url = await uploadImage(blob);
+    console.log(blob);
+    callback(blob, "alt text");
+    return false;
+  };
+
   return (
-    <EditorWrapper>
+    <>
       <Editor
         initialValue="hello react"
         previewStyle="vertical"
@@ -36,14 +43,13 @@ const EditMarkdown = () => {
         ref={editorRef}
         language="ko-KR"
         onChange={onChange}
+        hooks={{
+          addImageBlobHook: onUploadImage,
+        }}
       />
       <button onClick={onSubmit}>제출하기</button>
-    </EditorWrapper>
+    </>
   );
 };
 
 export default EditMarkdown;
-
-const EditorWrapper = styled.div`
-  margin-top: 60px;
-`;
