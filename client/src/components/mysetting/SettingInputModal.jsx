@@ -1,33 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import * as S from "../../styles/mysetting/MySettingStyled";
 import { useState } from "react";
 import mypageApi from "../../api/mypageApi";
 
 import swal from "sweetalert";
-export const ModalStyled = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ModalContent = styled.div`
-  width: 500px;
-  height: 500px;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
 
 export const EditNickNameModalInput = ({
   setNickNameInputShowModal,
@@ -59,8 +35,8 @@ export const EditNickNameModalInput = ({
   };
 
   return (
-    <ModalStyled>
-      <ModalContent>
+    <S.ModalStyled>
+      <S.ModalContent>
         <h1>닉네임 변경</h1>
         <input
           type="text"
@@ -68,10 +44,12 @@ export const EditNickNameModalInput = ({
           value={nickName}
           onChange={onChangeNickName}
         />
-        <button onClick={onClickEditNickName}>변경</button>
-        <button onClick={() => setNickNameInputShowModal(false)}>닫기</button>
-      </ModalContent>
-    </ModalStyled>
+        <div>
+          <button onClick={onClickEditNickName}>변경</button>
+          <button onClick={() => setNickNameInputShowModal(false)}>닫기</button>
+        </div>
+      </S.ModalContent>
+    </S.ModalStyled>
   );
 };
 
@@ -98,8 +76,8 @@ export const EditPasswordModalInput = ({ setPasswordInputSHowModal }) => {
   };
 
   return (
-    <ModalStyled>
-      <ModalContent>
+    <S.ModalStyled>
+      <S.ModalContent>
         <h1>비밀번호 변경</h1>
         <input
           type="password"
@@ -107,9 +85,11 @@ export const EditPasswordModalInput = ({ setPasswordInputSHowModal }) => {
           value={password}
           onChange={onChangePassword}
         />
-        <button onClick={onClickEditPassword}>변경</button>
-        <button onClick={() => setPasswordInputSHowModal(false)}>닫기</button>
-      </ModalContent>
-    </ModalStyled>
+        <div>
+          <button onClick={onClickEditPassword}>변경</button>
+          <button onClick={() => setPasswordInputSHowModal(false)}>닫기</button>
+        </div>
+      </S.ModalContent>
+    </S.ModalStyled>
   );
 };

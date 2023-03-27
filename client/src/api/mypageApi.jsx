@@ -9,11 +9,11 @@ const mypageApi = {
     return data;
   },
   upLoadProfile: async ({ profile }) => {
-    const result = await instance.patch(
+    const data = await instance.post(
       "/member-service/api/v1/members/upload-profile",
-      { profile }
+      profile
     );
-    return result;
+    return data;
   },
   editInfo: async ({ nickName }) => {
     const result = await instance.patch(
