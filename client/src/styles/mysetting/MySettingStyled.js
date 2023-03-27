@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const MyPageWrapper = styled.div`
-  margin-top: 60px;
   /* background-color: #f1f3f5; */
   display: flex;
   flex-direction: column;

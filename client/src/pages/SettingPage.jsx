@@ -5,6 +5,7 @@ import mypageApi from "../api/mypageApi";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { MyInfoState } from "../recoil/atom";
+import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
 const SettingPage = () => {
   const [info, setInfo] = useRecoilState(MyInfoState);
 
@@ -23,10 +24,10 @@ const SettingPage = () => {
   }, []);
 
   return (
-    <>
+    <LayoutMargin>
       <SettingHeader info={info} setInfo={setInfo} />
       <SettingList info={info} setInfo={setInfo} />
-    </>
+    </LayoutMargin>
   );
 };
 

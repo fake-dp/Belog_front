@@ -2,17 +2,14 @@ import React from "react";
 import EditHeader from "../components/editorpage/EditHeader";
 import EditMarkdown from "../components/editorpage/EditMarkdown";
 import styled from "styled-components";
+import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
 const EdtiPage = () => {
   return (
-    <EditorWrapper>
+    <LayoutMargin>
       <EditHeader />
       <EditMarkdown />
-    </EditorWrapper>
+    </LayoutMargin>
   );
 };
 
 export default EdtiPage;
-
-const EditorWrapper = styled.div`
-  margin-top: 60px;
-`;

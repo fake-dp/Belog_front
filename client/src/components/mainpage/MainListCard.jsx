@@ -1,61 +1,69 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
-import { PostListState } from "../../recoil/atom";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import MainListCard from "./MainListCard";
 
-const MainPostList = ({ isLoding }) => {
-  const postList = useRecoilValue(PostListState);
-  console.log("postList", postList);
-
+const MainListCard = ({
+  postId,
+  title,
+  contents,
+  thumbNail,
+  createdAt,
+  nickName,
+  isLoding,
+}) => {
   return (
-    <PostGridBox>
-      {postList.map((post) => (
-        <MainListCard
-          isLoding={isLoding}
-          key={post.postId}
-          postId={post.postId}
-          title={post.title}
-          contents={post.contents}
-          thumbNail={post.thumbNail}
-          createdAt={post.createdAt}
-          nickName={post.nickName}
-        />
-      ))}
-      {/* {postList.map((post) => (
-        <PostListWrapper key={post.postId}>
-          {post.thumbNail === "" ? null : (
+    <>
+      {isLoding ? (
+        <PostListWrapper key={postId}>
+          {thumbNail === "" ? null : (
             <PostThumbNailWrapper>
-              <PostThumbNail src={post.thumbNail || <Skeleton />} />
+              <PostThumbNail src={<Skeleton />} /> <Skeleton />
             </PostThumbNailWrapper>
           )}
-
           <ContentsWrapper>
-            <h5>{post.title || <Skeleton />}</h5>
-            <p>{post.contents || <Skeleton />}</p>
+            <h5>
+              <Skeleton />
+            </h5>
+            <p>
+              <Skeleton count={3} />
+            </p>
           </ContentsWrapper>
           <DateWrapper>
-            <p>{post.createdAt || <Skeleton />}</p>
+            <p>
+              <Skeleton />
+            </p>
           </DateWrapper>
           <UserNameWrapper>
-            <p>{post.nickName || <Skeleton />}</p>
+            <p>
+              <Skeleton />
+            </p>
           </UserNameWrapper>
         </PostListWrapper>
-      ))} */}
-    </PostGridBox>
+      ) : (
+        <PostListWrapper key={postId}>
+          {thumbNail === "" ? null : (
+            <PostThumbNailWrapper>
+              <PostThumbNail src={thumbNail} />
+            </PostThumbNailWrapper>
+          )}
+          <ContentsWrapper>
+            <h5>{title}</h5>
+            <p>{contents}</p>
+          </ContentsWrapper>
+          <DateWrapper>
+            <p>{createdAt}</p>
+          </DateWrapper>
+          <UserNameWrapper>
+            <p>{nickName}</p>
+          </UserNameWrapper>
+        </PostListWrapper>
+      )}
+    </>
   );
 };
 
-export default MainPostList;
-
-export const PostGridBox = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: -1rem;
-  flex-wrap: wrap;
-`;
+export default MainListCard;
 
 export const PostListWrapper = styled.div`
   width: 20rem;

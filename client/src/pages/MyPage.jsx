@@ -1,19 +1,13 @@
 import MyInfoHeader from "../components/mypage/MyInfoHeader";
 import SideTab from "../components/mypage/SideTab";
-import styled from "styled-components";
+import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
 const MyPage = () => {
   return (
-    <MyPageWrapper>
+    <LayoutMargin>
       <MyInfoHeader />
       <SideTab />
-    </MyPageWrapper>
+    </LayoutMargin>
   );
 };
 
 export default MyPage;
-
-const MyPageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-`;
