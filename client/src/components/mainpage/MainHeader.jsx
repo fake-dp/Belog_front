@@ -3,7 +3,7 @@ import styled from "styled-components";
 const MainHeader = () => {
   return (
     <MainHeaderWrapper>
-      <div>트렌딩</div>
+      {/* <div>트렌딩</div> */}
       <div>최신</div>
       <div>카테고리</div>
     </MainHeaderWrapper>

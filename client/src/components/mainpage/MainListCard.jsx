@@ -11,6 +11,7 @@ const MainListCard = ({
   createdAt,
   nickName,
   isLoding,
+  memberProfile,
 }) => {
   return (
     <>
@@ -55,7 +56,10 @@ const MainListCard = ({
             <p>{createdAt}</p>
           </DateWrapper>
           <UserNameWrapper>
-            <p>{nickName}</p>
+            <ProfileImg src={memberProfile} />
+            <p>
+              <span>by</span> {nickName}
+            </p>
           </UserNameWrapper>
         </PostListWrapper>
       )}
@@ -99,6 +103,13 @@ export const PostThumbNail = styled.img`
   height: 100%;
   display: block;
   object-fit: cover;
+`;
+
+export const ProfileImg = styled.img`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
 `;
 
 export const ContentsWrapper = styled.div`
@@ -147,5 +158,11 @@ export const UserNameWrapper = styled.div`
   font-size: 0.75rem;
   line-height: 1.5;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-items: center;
+  p {
+    > span {
+      color: #868e96;
+    }
+  }
 `;

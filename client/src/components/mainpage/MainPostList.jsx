@@ -22,28 +22,9 @@ const MainPostList = ({ isLoding }) => {
           thumbNail={post.thumbNail}
           createdAt={post.createdAt}
           nickName={post.nickName}
+          memberProfile={post.memberProfile}
         />
       ))}
-      {/* {postList.map((post) => (
-        <PostListWrapper key={post.postId}>
-          {post.thumbNail === "" ? null : (
-            <PostThumbNailWrapper>
-              <PostThumbNail src={post.thumbNail || <Skeleton />} />
-            </PostThumbNailWrapper>
-          )}
-
-          <ContentsWrapper>
-            <h5>{post.title || <Skeleton />}</h5>
-            <p>{post.contents || <Skeleton />}</p>
-          </ContentsWrapper>
-          <DateWrapper>
-            <p>{post.createdAt || <Skeleton />}</p>
-          </DateWrapper>
-          <UserNameWrapper>
-            <p>{post.nickName || <Skeleton />}</p>
-          </UserNameWrapper>
-        </PostListWrapper>
-      ))} */}
     </PostGridBox>
   );
 };
