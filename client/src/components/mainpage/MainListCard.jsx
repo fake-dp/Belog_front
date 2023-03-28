@@ -18,7 +18,7 @@ const MainListCard = ({
         <PostListWrapper key={postId}>
           {thumbNail === "" ? null : (
             <PostThumbNailWrapper>
-              <PostThumbNail src={<Skeleton />} /> <Skeleton />
+              {/* <PostThumbNail src={<Skeleton />} /> <Skeleton /> */}
             </PostThumbNailWrapper>
           )}
           <ContentsWrapper>

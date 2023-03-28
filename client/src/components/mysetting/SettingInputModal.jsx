@@ -93,3 +93,49 @@ export const EditPasswordModalInput = ({ setPasswordInputSHowModal }) => {
     </S.ModalStyled>
   );
 };
+
+export const EditIntroModalInput = ({ setShowIntroModal, setInfo, info }) => {
+  const [introText, setIntroText] = useState("");
+
+  const onChange = (e) => {
+    setIntroText(e.target.value);
+  };
+
+  const onClickEditIntro = async () => {
+    console.log("자기소개 변경");
+    const introData = {
+      introduce: introText,
+    };
+
+    try {
+      const data = await mypageApi.editIntroduce(introData);
+      swal("자기소개 변경", "자기소개가 변경되었습니다.", "success");
+      setInfo({
+        ...info,
+        introduce: introText,
+      });
+      setShowIntroModal(false);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <S.ModalStyled>
+      <S.ModalContent>
+        <h1>자기소개 작성</h1>
+        <textarea
+          type="text"
+          placeholder="자기소개를 작성해주세요!"
+          value={introText}
+          onChange={onChange}
+        />
+        <div>
+          <button onClick={onClickEditIntro}>변경</button>
+          <button onClick={() => setShowIntroModal(false)}>닫기</button>
+        </div>
+      </S.ModalContent>
+    </S.ModalStyled>
+  );
+};

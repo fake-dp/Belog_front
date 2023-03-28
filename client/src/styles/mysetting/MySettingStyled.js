@@ -115,6 +115,16 @@ export const ModalContent = styled.div`
     font-size: 15px;
     font-weight: 400;
   }
+  > textarea {
+    margin-top: 20px;
+    width: 400px;
+    height: 150px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 400;
+  }
   > div {
     > button {
       margin-top: 20px;

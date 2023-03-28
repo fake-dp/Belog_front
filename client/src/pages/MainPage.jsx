@@ -17,6 +17,7 @@ const MainPage = () => {
         const { body } = data;
         setPostList(body.items);
         setIsLoding(false);
+        // console.log(isLoding);
       } catch (error) {
         console.log(error);
       }

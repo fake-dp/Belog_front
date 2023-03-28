@@ -29,6 +29,13 @@ const mypageApi = {
     );
     return result;
   },
+  editIntroduce: async ({ introduce }) => {
+    const result = await instance.post(
+      "/member-service/api/v1/members/introduce",
+      { introduce }
+    );
+    return result;
+  },
 };
 
 export default mypageApi;
