@@ -47,7 +47,11 @@ const SettingHeader = ({ info, setInfo }) => {
           </S.SettingHeaderWrapper>
           <S.EditInfoWrapper>
             <h1>{info?.nickName}</h1>
-            <p>{info?.introduce}</p>
+            {info?.introduce === null ? (
+              <p>소개글을 작성해주세요</p>
+            ) : (
+              <p>{info?.introduce}</p>
+            )}
           </S.EditInfoWrapper>
         </S.ContentsWrapper>
       </S.MyPageWrapper>

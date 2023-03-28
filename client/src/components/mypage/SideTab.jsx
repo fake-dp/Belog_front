@@ -4,13 +4,13 @@ import Introduction from "./Introduction";
 import MyPostList from "./MyPostList";
 import MyScrap from "./MyScrap";
 import styled from "styled-components";
-const SideTab = () => {
+const SideTab = ({ info }) => {
   const [tab, setTab] = useState({
     active: 0,
   });
 
   const objTab = {
-    0: <Introduction />,
+    0: <Introduction info={info} />,
     1: <MyPostList />,
     2: <MyScrap />,
   };
