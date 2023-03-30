@@ -11,8 +11,8 @@ import { useParams } from "react-router-dom";
 const DetailPage = () => {
   const [markdown, setMarkdown] = useRecoilState(MarkdownState);
   const [detail, setDetail] = useState([]);
-
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getPostDetail = async () => {
@@ -22,6 +22,7 @@ const DetailPage = () => {
         const resultData = body;
         setDetail(resultData);
         setMarkdown(resultData.contents);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -31,9 +32,13 @@ const DetailPage = () => {
 
   return (
     <LayoutMargin>
-      <DetailWrapper>
-        <DetailContent detail={detail} />
-      </DetailWrapper>
+      {isLoading ? (
+        <IsLoading>데이터 불러오는 중...</IsLoading>
+      ) : (
+        <DetailWrapper>
+          <DetailContent detail={detail} />
+        </DetailWrapper>
+      )}
     </LayoutMargin>
   );
 };
@@ -46,4 +51,14 @@ export const DetailWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   /* align-items: center; */
+`;
+
+export const IsLoading = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
 `;
