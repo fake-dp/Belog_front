@@ -7,6 +7,12 @@ const getPost = {
     const data = await axios.get(`${BASEURL}/post-service/api/v1/posts`);
     return data;
   },
+  getPostDetail: async (postId) => {
+    const data = await axios.get(
+      `${BASEURL}/post-service/api/v1/posts/${postId}`
+    );
+    return data;
+  },
 };
 
 export default getPost;

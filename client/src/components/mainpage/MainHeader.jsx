@@ -16,7 +16,7 @@ export const MainHeaderWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 1rem;
+  padding-top: 1rem;
   height: 60px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   width: 20rem;

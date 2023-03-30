@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useNavigate } from "react-router-dom";
 
 const MainListCard = ({
   postId,
@@ -13,6 +14,12 @@ const MainListCard = ({
   isLoding,
   memberProfile,
 }) => {
+  const navigate = useNavigate();
+
+  const goDetailPage = (postId) => {
+    navigate(`/detail/${postId}`);
+  };
+
   return (
     <>
       {isLoding ? (
@@ -42,7 +49,7 @@ const MainListCard = ({
           </UserNameWrapper>
         </PostListWrapper>
       ) : (
-        <PostListWrapper key={postId}>
+        <PostListWrapper onClick={() => goDetailPage(postId)} key={postId}>
           {thumbNail === "" ? null : (
             <PostThumbNailWrapper>
               <PostThumbNail src={thumbNail} />
