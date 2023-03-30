@@ -66,7 +66,7 @@ const MainPage = () => {
 
   return (
     <LayoutMargin>
-      <MainHeader />
+      {/* <MainHeader /> */}
       <MainPostList isLoding={isLoding} />
       <ScrollToTop onClick={onClick}>
         <AiOutlineArrowUp />

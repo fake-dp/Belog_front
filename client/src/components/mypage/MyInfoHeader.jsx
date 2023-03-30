@@ -1,35 +1,12 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import mypageApi from "../../api/mypageApi";
+
 import styled from "styled-components";
 
 const MyInfoHeader = () => {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const testBtn = async () => {
-      try {
-        const { data } = await mypageApi.getMyPage();
-        const { body } = data;
-        const resultData = body;
-        console.log("dd", resultData);
-        setData(resultData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    testBtn();
-  }, []);
-
   return (
     <MyPageWrapper>
       <ContentsWrapper>
-        <ImgStyle src={data?.profiles[0].path} />
-        <p>이메일: {data?.email}</p>
-        <p>닉네임: {data?.nickName}</p>
-        <p>가입일: {data?.profiles[0].createdAt}</p>
-        {/* 회원탈퇴 */}
+        <ImgStyle />
       </ContentsWrapper>
     </MyPageWrapper>
   );

@@ -1,22 +1,7 @@
 import React from "react";
-import { Viewer } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
-import { useRecoilValue } from "recoil";
-import { MarkdownState } from "../../recoil/atom";
-import styled from "styled-components";
 const MyPostList = () => {
-  const markdown = useRecoilValue(MarkdownState);
-
-  return (
-    <EditorWrapper>
-      <Viewer initialValue={markdown || ""} />
-    </EditorWrapper>
-  );
+  return <div>내가 쓴 글 리스트 조회</div>;
 };
 
 export default MyPostList;
-
-const EditorWrapper = styled.div`
-  margin-top: 60px;
-`;

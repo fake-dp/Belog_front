@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import DetailContents from "./DetailContents";
 import { useRecoilValue } from "recoil";
 import { MarkdownState } from "../../recoil/atom";
 import { Viewer } from "@toast-ui/react-editor";
@@ -75,9 +74,22 @@ export const DetailProfile = styled.div`
 `;
 
 export const CategoryText = styled.p`
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: #868e96;
-  margin-bottom: 1rem;
-  font-weight: 600;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.875rem;
+  background: #f8f9fa;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 2rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-right: 0.875rem;
+  color: #12b886;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
 `;
