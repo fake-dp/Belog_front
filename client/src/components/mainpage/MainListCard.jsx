@@ -22,54 +22,26 @@ const MainListCard = ({
 
   return (
     <>
-      {isLoading ? (
-        <PostListWrapper key={postId}>
-          {thumbNail === "" ? null : (
-            <PostThumbNailWrapper>
-              {/* <PostThumbNail src={<Skeleton />} /> <Skeleton /> */}
-            </PostThumbNailWrapper>
-          )}
-          <ContentsWrapper>
-            <h5>
-              <Skeleton />
-            </h5>
-            <p>
-              <Skeleton count={3} />
-            </p>
-          </ContentsWrapper>
-          <DateWrapper>
-            <p>
-              <Skeleton />
-            </p>
-          </DateWrapper>
-          <UserNameWrapper>
-            <p>
-              <Skeleton />
-            </p>
-          </UserNameWrapper>
-        </PostListWrapper>
-      ) : (
-        <PostListWrapper onClick={() => goDetailPage(postId)} key={postId}>
-          {thumbNail === "" ? null : (
-            <PostThumbNailWrapper>
-              <PostThumbNail src={thumbNail} />
-            </PostThumbNailWrapper>
-          )}
-          <ContentsWrapper>
-            <h5>{title}</h5>
-            <p>{contents}</p>
-          </ContentsWrapper>
-          <DateWrapper>
-            <p>{createdAt}</p>
-          </DateWrapper>
-          <UserNameWrapper>
-            <ProfileImg src={memberProfile} />
-            <p>
-              <span>by</span> {nickName}
-            </p>
-          </UserNameWrapper>
-        </PostListWrapper>
-      )}
+      <PostListWrapper onClick={() => goDetailPage(postId)} key={postId}>
+        {thumbNail === "" ? null : (
+          <PostThumbNailWrapper>
+            <PostThumbNail src={thumbNail} />
+          </PostThumbNailWrapper>
+        )}
+        <ContentsWrapper>
+          <h5>{title}</h5>
+          <p>{contents}</p>
+        </ContentsWrapper>
+        <DateWrapper>
+          <p>{createdAt}</p>
+        </DateWrapper>
+        <UserNameWrapper>
+          <ProfileImg src={memberProfile} />
+          <p>
+            <span>by</span> {nickName}
+          </p>
+        </UserNameWrapper>
+      </PostListWrapper>
     </>
   );
 };

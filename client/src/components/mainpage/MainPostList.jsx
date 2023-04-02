@@ -13,16 +13,18 @@ const MainPostList = ({ isLoading }) => {
   return (
     <PostGridBox>
       {postList.map((post) => (
-        <MainListCard
-          isLoading={isLoading}
-          postId={post.postId}
-          title={post.title}
-          contents={post.contents}
-          thumbNail={post.thumbNail}
-          createdAt={post.createdAt}
-          nickName={post.nickName}
-          memberProfile={post.memberProfile}
-        />
+        <div key={post.postId}>
+          <MainListCard
+            isLoading={isLoading}
+            postId={post.postId}
+            title={post.title}
+            contents={post.contents}
+            thumbNail={post.thumbNail}
+            createdAt={post.createdAt}
+            nickName={post.nickName}
+            memberProfile={post.memberProfile}
+          />
+        </div>
       ))}
     </PostGridBox>
   );
