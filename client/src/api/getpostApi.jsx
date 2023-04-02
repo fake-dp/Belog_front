@@ -7,7 +7,7 @@ const getPost = {
     const data = await axios.get(`${BASEURL}/post-service/api/v1/posts`);
     return data;
   },
-  getPostDetail: async ({ postId }) => {
+  getPostDetail: async (postId) => {
     const data = await axios.get(
       `${BASEURL}/post-service/api/v1/posts/${postId}`
     );

@@ -5,15 +5,15 @@ import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import MainListCard from "./MainListCard";
-
+import * as S from "../../styles/mainpage/MainStyled";
 const MainPostList = ({ isLoading }) => {
   const postList = useRecoilValue(PostListState);
-  console.log("postList", postList);
+  //   console.log("postList", postList);
 
   return (
-    <PostGridBox>
-      {postList.map((post) => (
-        <div key={post.postId}>
+    <S.PostGridBox>
+      {postList.map((post, idx) => (
+        <div key={idx}>
           <MainListCard
             isLoading={isLoading}
             postId={post.postId}
@@ -22,18 +22,13 @@ const MainPostList = ({ isLoading }) => {
             thumbNail={post.thumbNail}
             createdAt={post.createdAt}
             nickName={post.nickName}
+            memberId={post.memberId}
             memberProfile={post.memberProfile}
           />
         </div>
       ))}
-    </PostGridBox>
+    </S.PostGridBox>
   );
 };
 
 export default MainPostList;
-
-export const PostGridBox = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
