@@ -11,7 +11,7 @@ const MainListCard = ({
   thumbNail,
   createdAt,
   nickName,
-  isLoding,
+  isLoading,
   memberProfile,
 }) => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const MainListCard = ({
 
   return (
     <>
-      {isLoding ? (
+      {isLoading ? (
         <PostListWrapper key={postId}>
           {thumbNail === "" ? null : (
             <PostThumbNailWrapper>

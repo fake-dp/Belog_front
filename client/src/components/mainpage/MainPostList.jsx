@@ -6,7 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import MainListCard from "./MainListCard";
 
-const MainPostList = ({ isLoding }) => {
+const MainPostList = ({ isLoading }) => {
   const postList = useRecoilValue(PostListState);
   console.log("postList", postList);
 
@@ -14,8 +14,7 @@ const MainPostList = ({ isLoding }) => {
     <PostGridBox>
       {postList.map((post) => (
         <MainListCard
-          isLoding={isLoding}
-          key={post.postId}
+          isLoading={isLoading}
           postId={post.postId}
           title={post.title}
           contents={post.contents}

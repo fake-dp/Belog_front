@@ -15,8 +15,8 @@ const EditMarkdown = () => {
   const [markdown, setMarkdown] = useRecoilState(MarkdownState);
 
   const onChange = () => {
-    const data = editorRef.current.getInstance().getHTML();
-    // console.log(data);
+    const data = editorRef.current.getInstance().getMarkdown();
+    console.log(data);
     setMarkdown(data);
   };
 

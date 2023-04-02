@@ -13,7 +13,7 @@ const DetailPage = () => {
   const [detail, setDetail] = useState([]);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log("@@", id);
   useEffect(() => {
     const getPostDetail = async () => {
       try {

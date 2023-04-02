@@ -1,76 +1,73 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import getPost from "../api/getpostApi";
-import styled from "styled-components";
-import MainHeader from "../components/mainpage/MainHeader";
-import MainPostList from "../components/mainpage/MainPostList";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useRecoilState } from "recoil";
 import { PostListState } from "../recoil/atom";
+import MainPostList from "../components/mainpage/MainPostList";
+import MainScrollTop from "../hook/MainScrollTop";
 import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
-import { AiOutlineArrowUp } from "react-icons/ai";
+import useDebounce from "../hook/useDebounce";
 
 const MainPage = () => {
   const [postList, setPostList] = useRecoilState(PostListState);
-  const [isLoding, setIsLoding] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [nextCursor, setNextCursor] = useState(-1);
+  const debouncedNextCursor = useDebounce(nextCursor, 200);
+
   useEffect(() => {
-    const getPostList = async () => {
-      try {
-        const { data } = await getPost.getPostList();
-        const { body } = data;
-        setPostList(body.items);
-        setIsLoding(false);
-        // console.log(isLoding);
-      } catch (error) {
-        console.log(error);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight
+      ) {
+        fetchDataAndAppend();
       }
     };
-    getPostList();
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [debouncedNextCursor]);
 
-  const [isScroll, setIsScroll] = useState(false);
-
-  const onScroll = () => {
-    if (window.scrollY > 100) {
-      setIsScroll(true);
-    } else {
-      setIsScroll(false);
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(
+        `http://3.39.159.26:8080/post-service/api/v1/posts?key=${nextCursor}`
+      );
+      const { body } = data;
+      setPostList(body.items);
+      setNextCursor(body.nextCursor.key);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const onClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const ScrollToTop = styled.button`
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #f5f5f5;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    display: ${isScroll ? "block" : "none"};
-    svg {
-      font-size: 30px;
-      color: #000;
+  const fetchDataAndAppend = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(
+        `http://3.39.159.26:8080/post-service/api/v1/posts?key=${debouncedNextCursor}`
+      );
+      const { body } = data;
+      setPostList((prevData) => [...prevData, ...body.items]);
+      setNextCursor(body.nextCursor.key);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-  `;
+  };
 
   return (
     <LayoutMargin>
       {/* <MainHeader /> */}
-      <MainPostList isLoding={isLoding} />
-      <ScrollToTop onClick={onClick}>
-        <AiOutlineArrowUp />
-      </ScrollToTop>
+      <MainPostList isLoading={isLoading} />
+
+      <MainScrollTop />
     </LayoutMargin>
   );
 };
