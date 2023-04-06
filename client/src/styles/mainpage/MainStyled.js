@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 export const PostGridBox = styled.div`
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  /* display: grid; */
+  justify-content: center;
+  width: 100%;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
 `;
 
 export const PostListWrapper = styled.div`

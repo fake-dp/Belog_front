@@ -5,6 +5,7 @@ import EditorPage from "../pages/EditorPage";
 import DetailPage from "../pages/DetailPage";
 import Layout from "../layout/Layout";
 import SettingPage from "../pages/SettingPage";
+
 function AppRouter() {
   return (
     <Routes>

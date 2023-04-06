@@ -1,34 +1,79 @@
-import React from "react";
-import { useRecoilValue } from "recoil";
+import React, { useState, useEffect, useRef } from "react";
 import { PostListState } from "../../recoil/atom";
-import styled from "styled-components";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import MainListCard from "./MainListCard";
+import { useRecoilState } from "recoil";
 import * as S from "../../styles/mainpage/MainStyled";
-const MainPostList = ({ isLoading }) => {
-  const postList = useRecoilValue(PostListState);
-  //   console.log("postList", postList);
+import getPost from "../../api/getpostApi";
+import styled from "styled-components";
+const MainPostList = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [postList, setPostList] = useRecoilState(PostListState);
+  const [nextCursor, setNextCursor] = useState(-1);
+  const intersectingRef = useRef(false);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await getPost.getPostList(nextCursor);
+      const { body } = data;
+      console.log("데이터 호출 확인용!", body);
+      console.log("postList", postList);
+      setNextCursor(body.nextCursor.key);
+      setPostList((prevData) => [...prevData, ...body.items]);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isLoading && intersectingRef.current) {
+          fetchData();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (intersectingRef.current) {
+      observer.observe(intersectingRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isLoading]);
 
   return (
-    <S.PostGridBox>
-      {postList.map((post, idx) => (
-        <div key={idx}>
-          <MainListCard
-            isLoading={isLoading}
-            postId={post.postId}
-            title={post.title}
-            contents={post.contents}
-            thumbNail={post.thumbNail}
-            createdAt={post.createdAt}
-            nickName={post.nickName}
-            memberId={post.memberId}
-            memberProfile={post.memberProfile}
-          />
-        </div>
-      ))}
-    </S.PostGridBox>
+    <TestWrapper>
+      <S.PostGridBox>
+        {postList.map((post, idx) => (
+          <div key={idx}>
+            <MainListCard
+              isLoading={isLoading}
+              postId={post.postId}
+              title={post.title}
+              contents={post.contents}
+              thumbNail={post.thumbNail}
+              createdAt={post.createdAt}
+              nickName={post.nickName}
+              memberId={post.memberId}
+              memberProfile={post.memberProfile}
+            />
+          </div>
+        ))}
+      </S.PostGridBox>
+      <div ref={intersectingRef}>IsLoading...</div>
+    </TestWrapper>
   );
 };
 
 export default MainPostList;
+
+const TestWrapper = styled.div`
+  width: 1728px;
+  margin-left: auto;
+  margin-right: auto;
+`;
