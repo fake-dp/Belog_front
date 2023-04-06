@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASEURL = "http://3.39.159.26:8080";
+const BASEURL = process.env.REACT_APP_SERVER;
 
 const getPost = {
   getPostList: async (nextCursor) => {
