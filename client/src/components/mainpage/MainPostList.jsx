@@ -4,7 +4,7 @@ import MainListCard from "./MainListCard";
 import { useRecoilState } from "recoil";
 import * as S from "../../styles/mainpage/MainStyled";
 import getPost from "../../api/getpostApi";
-import styled from "styled-components";
+
 const MainPostList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [postList, setPostList] = useRecoilState(PostListState);
@@ -47,33 +47,29 @@ const MainPostList = () => {
   }, [isLoading]);
 
   return (
-    <TestWrapper>
-      <S.PostGridBox>
-        {postList.map((post, idx) => (
-          <div key={idx}>
-            <MainListCard
-              isLoading={isLoading}
-              postId={post.postId}
-              title={post.title}
-              contents={post.contents}
-              thumbNail={post.thumbNail}
-              createdAt={post.createdAt}
-              nickName={post.nickName}
-              memberId={post.memberId}
-              memberProfile={post.memberProfile}
-            />
-          </div>
-        ))}
-      </S.PostGridBox>
-      <div ref={intersectingRef}>IsLoading...</div>
-    </TestWrapper>
+    <S.MainListWrapper>
+      <S.MainListFlexWrapper>
+        <S.PostGridBox>
+          {postList.map((post, idx) => (
+            <div key={idx}>
+              <MainListCard
+                isLoading={isLoading}
+                postId={post.postId}
+                title={post.title}
+                contents={post.contents}
+                thumbNail={post.thumbNail}
+                createdAt={post.createdAt}
+                nickName={post.nickName}
+                memberId={post.memberId}
+                memberProfile={post.memberProfile}
+              />
+            </div>
+          ))}
+        </S.PostGridBox>
+        <div ref={intersectingRef}>IsLoading...</div>
+      </S.MainListFlexWrapper>
+    </S.MainListWrapper>
   );
 };
 
 export default MainPostList;
-
-const TestWrapper = styled.div`
-  width: 1728px;
-  margin-left: auto;
-  margin-right: auto;
-`;

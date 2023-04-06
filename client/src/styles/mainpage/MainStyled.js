@@ -1,12 +1,29 @@
 import styled from "styled-components";
 
+export const MainListWrapper = styled.div`
+  width: 1778px;
+  margin-left: auto;
+  margin-right: auto;
+  @media (max-width: 1919px) {
+    width: 1426px;
+  }
+  @media (max-width: 1440px) {
+    width: 1076px;
+  }
+  @media (max-width: 1056px) {
+    width: calc(100% - 2rem);
+  }
+`;
+
+export const MainListFlexWrapper = styled.div`
+  flex: 1 1 0%;
+`;
+
 export const PostGridBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  /* display: grid; */
   justify-content: center;
   width: 100%;
-  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
 `;
 
 export const PostListWrapper = styled.div`
