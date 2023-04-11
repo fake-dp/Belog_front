@@ -8,11 +8,14 @@ import "@toast-ui/editor/dist/i18n/ko-kr";
 import { useRef } from "react";
 import { useRecoilState } from "recoil";
 import { MarkdownState } from "../../recoil/atom";
-
+import getPost from "../../api/getpostApi";
+import { useState } from "react";
 const EditMarkdown = () => {
   const editorRef = useRef();
 
   const [markdown, setMarkdown] = useRecoilState(MarkdownState);
+  const [title, setTitle] = useState("test");
+  const [category, setCategory] = useState("test11");
 
   const onChange = () => {
     const data = editorRef.current.getInstance().getMarkdown();
@@ -20,8 +23,16 @@ const EditMarkdown = () => {
     setMarkdown(data);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log(markdown);
+    const data = {
+      title: title,
+      category: category,
+      contents: markdown,
+      Images: [],
+    };
+    const result = await getPost.createPost(data);
+    console.log(result);
   };
 
   const onUploadImage = async (blob, callback) => {
