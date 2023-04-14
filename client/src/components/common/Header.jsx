@@ -20,14 +20,14 @@ const Header = () => {
   //     });
   //   }
   // }, [isLogin]);
-  console.log(isLogin.memberId);
+  // console.log(isLogin.memberId);
   const [showModal, setShowModal] = useState(false);
   const [showMyInfo, setShowMyInfo] = useState(false);
 
   const toggleMyInfo = () => {
     setShowMyInfo(!showMyInfo);
   };
-  console.log(showMyInfo);
+
   const navigate = useNavigate();
 
   const goEditPage = () => {

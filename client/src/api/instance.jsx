@@ -8,7 +8,7 @@ export const instance = axios.create({
   },
 });
 
-export const postinstance = axios.create({
+export const imginstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
   headers: {
     "Access-Control-Allow-Origin": "*",
@@ -26,7 +26,7 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-postinstance.interceptors.request.use((config) => {
+imginstance.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("access_token");
   const memberId = localStorage.getItem("member_id");
   if (accessToken && config.headers) {

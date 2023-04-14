@@ -6,7 +6,6 @@ import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
 const EdtiPage = () => {
   return (
     <LayoutMargin>
-      <EditHeader />
       <EditMarkdown />
     </LayoutMargin>
   );

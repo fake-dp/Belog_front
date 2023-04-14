@@ -1,5 +1,5 @@
 import axios from "axios";
-import { postinstance } from "./instance";
+import { imginstance } from "./instance";
 const BASEURL = process.env.REACT_APP_SERVER;
 
 const getPost = {
@@ -15,17 +15,9 @@ const getPost = {
     );
     return data;
   },
-  createPost: async (title, contents, category, images) => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("contents", contents);
-    formData.append("category", category);
-    if (images) {
-      images.forEach((image) => formData.append("images", image));
-    }
-
-    const { data } = await postinstance.post(
-      `/post-service/api/v1/posts`,
+  uploadImg: async (formData) => {
+    const { data } = await imginstance.post(
+      `/post-service/api/v1/images/upload`,
       formData
     );
     return data;
