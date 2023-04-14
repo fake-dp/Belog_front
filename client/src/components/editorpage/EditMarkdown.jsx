@@ -8,25 +8,35 @@ import "@toast-ui/editor/dist/i18n/ko-kr";
 import { useRef, useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { MarkdownState } from "../../recoil/atom";
-import getPost from "../../api/getpostApi";
+import editApi from "../../api/editApi";
 import EditHeader from "./EditHeader";
 
 const EditMarkdown = () => {
   const editorRef = useRef();
-
-  const [markdown, setMarkdown] = useRecoilState(MarkdownState);
+  const [contents, setcontents] = useRecoilState(MarkdownState);
   const [title, setTitle] = useState("");
+
   const [category, setCategory] = useState("IT");
   const [images, setImages] = useState([]);
 
   const onChange = () => {
     const data = editorRef.current.getInstance().getMarkdown();
     console.log(data);
-    setMarkdown(data);
+    setcontents(data);
   };
 
   const onSubmit = async () => {
-    console.log(markdown);
+    try {
+      const data = await editApi.createPost({
+        title,
+        category,
+        contents,
+        images,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onUploadImage = async (blob, callback) => {
@@ -34,12 +44,12 @@ const EditMarkdown = () => {
       const formData = new FormData();
       formData.append("image", blob);
       console.log("1111111112");
-      const data = await getPost.uploadImg(formData);
+      const data = await editApi.uploadImg(formData);
       console.log("222222222");
       console.log("@@result@@", data.result, data.body);
-      // console.log("1@@@@@", result.body.path);
+
       const imageUrl = data.body.path;
-      // 이미지 상태관리를 배열에 넣어주세요
+
       setImages((prev) => [...prev, imageUrl]);
       callback(imageUrl, "alt text");
     } catch (error) {
@@ -58,7 +68,7 @@ const EditMarkdown = () => {
         setTitle={setTitle}
       />
       <Editor
-        initialValue="hello react"
+        initialValue=""
         previewStyle="vertical"
         height="80vh"
         initialEditType="markdown"
