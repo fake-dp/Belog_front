@@ -1,10 +1,12 @@
 import React from "react";
 import EditHeader from "../components/editorpage/EditHeader";
 import EditMarkdown from "../components/editorpage/EditMarkdown";
-import styled from "styled-components";
-import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
 
+import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
+import UseIsLogin from "../hook/UseIsLogin";
 const EdtiPage = () => {
+  UseIsLogin();
+
   return (
     <LayoutMargin>
       <EditMarkdown />

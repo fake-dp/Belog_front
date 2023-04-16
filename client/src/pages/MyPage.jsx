@@ -5,8 +5,9 @@ import mypageApi from "../api/mypageApi";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { MyInfoState } from "../recoil/atom";
-
+import UseIsLogin from "../hook/UseIsLogin";
 const MyPage = () => {
+  UseIsLogin();
   const [info, setInfo] = useRecoilState(MyInfoState);
 
   useEffect(() => {

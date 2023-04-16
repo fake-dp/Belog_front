@@ -6,7 +6,9 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { MyInfoState } from "../recoil/atom";
 import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
+import UseIsLogin from "../hook/UseIsLogin";
 const SettingPage = () => {
+  UseIsLogin();
   const [info, setInfo] = useRecoilState(MyInfoState);
 
   useEffect(() => {

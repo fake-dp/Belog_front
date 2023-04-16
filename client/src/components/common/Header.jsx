@@ -13,6 +13,17 @@ const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const [showMyInfo, setShowMyInfo] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    const memberId = localStorage.getItem("member_id");
+    if (token && memberId) {
+      setIsLogin({
+        isLogin: true,
+        memberId: memberId,
+      });
+    }
+  }, [setIsLogin]);
+
   const toggleMyInfo = () => {
     setShowMyInfo(!showMyInfo);
   };
@@ -41,6 +52,7 @@ const Header = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("member_id");
       localStorage.removeItem("access_token");
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }
