@@ -19,6 +19,13 @@ const editApi = {
     });
     return data;
   },
+  deleteimg: async (url) => {
+    const data = await instance.delete(
+      `${BASEURL}/post-service/api/v1/images/remove`,
+      url
+    );
+    return data;
+  },
 };
 
 export default editApi;

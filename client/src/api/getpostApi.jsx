@@ -15,13 +15,6 @@ const getPost = {
     );
     return data;
   },
-  uploadImg: async (formData) => {
-    const { data } = await imginstance.post(
-      `/post-service/api/v1/images/upload`,
-      formData
-    );
-    return data;
-  },
 };
 
 export default getPost;

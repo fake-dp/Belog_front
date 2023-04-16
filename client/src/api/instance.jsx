@@ -35,3 +35,45 @@ imginstance.interceptors.request.use((config) => {
   }
   return config;
 });
+
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem("refresh_token");
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
+        { refreshToken }
+      );
+      const accessToken = response.data.access_token;
+      localStorage.setItem("access_token", accessToken);
+      return instance(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
+
+imginstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem("refresh_token");
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
+        { refreshToken }
+      );
+      const accessToken = response.data.access_token;
+      localStorage.setItem("access_token", accessToken);
+      return imginstance(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);

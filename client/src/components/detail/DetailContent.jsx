@@ -20,6 +20,7 @@ const DetailHeader = ({ detail }) => {
         </div>
       </DetailProfile>
       <CategoryText>{detail?.category}</CategoryText>
+      <MarkLine></MarkLine>
       <Viewer initialValue={markdown} />
     </DetailHeaderWrapper>
   );
@@ -31,7 +32,22 @@ export const DetailHeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem;
+  /* padding: 5rem; */
+  /* background-color: red; */
+  width: 768px;
+  margin: 5rem auto 0px;
+  padding-top: 2rem;
+  /* medie 쿼리  */
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const MarkLine = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #e9ecef;
+  margin-bottom: 2rem;
 `;
 
 export const DetailTitle = styled.h1`
@@ -74,7 +90,7 @@ export const DetailProfile = styled.div`
 `;
 
 export const CategoryText = styled.p`
-  width: 80px;
+  width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;

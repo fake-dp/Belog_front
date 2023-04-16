@@ -10,14 +10,16 @@ import { useRecoilState } from "recoil";
 import { MarkdownState } from "../../recoil/atom";
 import editApi from "../../api/editApi";
 import EditHeader from "./EditHeader";
-
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 const EditMarkdown = () => {
   const editorRef = useRef();
   const [contents, setcontents] = useRecoilState(MarkdownState);
   const [title, setTitle] = useState("");
-
   const [category, setCategory] = useState("IT");
   const [images, setImages] = useState([]);
+
+  const navigate = useNavigate();
 
   const onChange = () => {
     const data = editorRef.current.getInstance().getMarkdown();
@@ -33,7 +35,8 @@ const EditMarkdown = () => {
         contents,
         images,
       });
-      console.log(data);
+
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -43,11 +46,9 @@ const EditMarkdown = () => {
     try {
       const formData = new FormData();
       formData.append("image", blob);
-      console.log("1111111112");
       const data = await editApi.uploadImg(formData);
-      console.log("222222222");
-      console.log("@@result@@", data.result, data.body);
 
+      console.log("@@result@@", data.result, data.body);
       const imageUrl = data.body.path;
 
       setImages((prev) => [...prev, imageUrl]);
@@ -81,9 +82,20 @@ const EditMarkdown = () => {
           addImageBlobHook: onUploadImage,
         }}
       />
-      <button onClick={onSubmit}>제출하기</button>
+      <SubmitBtn onClick={onSubmit}>출간하기</SubmitBtn>
     </>
   );
 };
 
 export default EditMarkdown;
+
+const SubmitBtn = styled.button`
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+`;

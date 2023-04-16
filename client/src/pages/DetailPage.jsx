@@ -13,7 +13,7 @@ const DetailPage = () => {
   const [detail, setDetail] = useState([]);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  console.log("@@", id);
+
   useEffect(() => {
     const getPostDetail = async () => {
       try {
@@ -36,7 +36,9 @@ const DetailPage = () => {
         <IsLoading>데이터 불러오는 중...</IsLoading>
       ) : (
         <DetailWrapper>
-          <DetailContent detail={detail} />
+          <div>
+            <DetailContent detail={detail} />
+          </div>
         </DetailWrapper>
       )}
     </LayoutMargin>
@@ -47,10 +49,15 @@ export default DetailPage;
 
 export const DetailWrapper = styled.div`
   width: 100%;
+
   display: flex;
   justify-content: center;
   flex-direction: column;
   /* align-items: center; */
+  > div {
+    margin: 0 auto;
+    max-width: 800px;
+  }
 `;
 
 export const IsLoading = styled.div`

@@ -60,6 +60,8 @@ const AuthModal = ({ setShowModal }) => {
           console.log(data);
           localStorage.setItem("access_token", data.body.accessToken);
           localStorage.setItem("member_id", data.body.memberId);
+          // 리프레쉬 토큰
+          localStorage.setItem("refresh_token", data.body.refreshToken);
           swal(data.result.status, data.result.message, "success");
           setShowModal(false);
           setIsLogin({

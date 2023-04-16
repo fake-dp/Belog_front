@@ -10,17 +10,6 @@ import { loginState } from "../../recoil/atom";
 import authApi from "../../api/authApi";
 const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     setIsLogin({
-  //       isLogin: true,
-  //       memberId: localStorage.getItem("member_id"),
-  //     });
-  //   }
-  // }, [isLogin]);
-  // console.log(isLogin.memberId);
   const [showModal, setShowModal] = useState(false);
   const [showMyInfo, setShowMyInfo] = useState(false);
 
@@ -67,7 +56,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <div>
-        <LinkStyle to="/">Winter Blog</LinkStyle>
+        <LinkStyle to="/">Dev Log</LinkStyle>
       </div>
       <HeaderRight>
         {isLogin.isLogin ? (
