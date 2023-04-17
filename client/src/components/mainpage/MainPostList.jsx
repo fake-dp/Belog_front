@@ -7,6 +7,7 @@ import getPost from "../../api/getpostApi";
 
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
+import MainHeader from "./MainHeader";
 
 const MainPostList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +52,7 @@ const MainPostList = () => {
 
   return (
     <S.MainListWrapper>
+      <MainHeader />
       <S.MainListFlexWrapper>
         <S.PostGridBox>
           {postList.map((post, idx) => (

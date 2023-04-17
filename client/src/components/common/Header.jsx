@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { loginState } from "../../recoil/atom";
 import authApi from "../../api/authApi";
+import Search from "./Search";
 const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [showModal, setShowModal] = useState(false);
@@ -71,18 +72,21 @@ const Header = () => {
         <LinkStyle to="/">Dev Log</LinkStyle>
       </div>
       <HeaderRight>
+        <Search />
         {isLogin.isLogin ? (
           <>
-            <WritePtag onClick={goEditPage}>글쓰기</WritePtag>
+            <WritePtag onClick={goEditPage}>새 글 작성</WritePtag>
             <InfoRound
               src="https://placeimg.com/200/200/people"
               onClick={toggleMyInfo}
             ></InfoRound>
             {showMyInfo && (
               <InfoMenuWrapper>
-                <p onClick={goMyPage}>마이페이지</p>
-                <p onClick={goSettingPage}>설정</p>
-                <p onClick={logoutBtn}>로그아웃</p>
+                <div>
+                  <p onClick={goMyPage}>마이페이지</p>
+                  <p onClick={goSettingPage}>설정</p>
+                  <p onClick={logoutBtn}>로그아웃</p>
+                </div>
               </InfoMenuWrapper>
             )}
           </>
@@ -103,23 +107,23 @@ const HeaderWrapper = styled.div`
   align-items: center;
   padding: 0 20px;
   height: 60px;
-  background-color: #2f3640;
+  background-color: #f5f6fa;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #e5e5e5;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  color: #fff;
-  cursor: pointer;
 `;
 
 const HeaderRight = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* width: 200px; */
-  position: relative;
+
   > P {
     margin: 20px;
     font-size: 20px;
@@ -129,28 +133,31 @@ const HeaderRight = styled.div`
 
 const LinkStyle = styled(Link)`
   text-decoration: none;
-  color: #fff;
+  color: #212529;
   font-size: 20px;
   font-weight: 600;
 `;
 
-const WritePtag = styled.p`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const WritePtag = styled.button`
   height: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  /* font-size: 1rem; */
+  font-size: 1rem;
   border-radius: 1rem;
-  border: none;
   outline: none;
   font-weight: bold;
   word-break: keep-all;
-  background: #ff5252;
-  color: #fff;
-  /* transition: all 0.125s ease-in 0s; */
+  background: #f8f9fa;
+  border: 1px solid #212529;
+  color: #212529;
+  transition: all 0.125s ease-in 0s;
   cursor: pointer;
+  &:hover {
+    background: #212529;
+    color: #f8f9fa;
+  }
 `;
 
 const InfoRound = styled.img`
@@ -168,30 +175,36 @@ const InfoRound = styled.img`
 `;
 
 const InfoMenuWrapper = styled.div`
-  position: absolute;
-  top: 60px;
-  padding: 10px;
-  /* right: 50px; */
-  left: 120px;
-  width: 120px;
-  height: 100px;
-  background-color: #f7f1e3;
-  /* border: 1px solid #fff; */
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  /* align-items: center; */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
-  > P {
-    font-size: 16px;
-    font-weight: 600;
-    color: #2c2c54;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    cursor: pointer;
-    &:hover {
-      color: #cd6133;
+  background-color: red;
+  position: relative;
+  margin-top: 1rem;
+
+  > div {
+    position: absolute;
+    top: 20px;
+    left: -30px;
+    z-index: 5;
+    width: 12rem;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+    @media (max-width: 1248px) {
+      left: -100px;
+    }
+    @media (max-width: 768px) {
+      left: -170px;
+    }
+    > p {
+      padding: 1rem 2rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      &:hover {
+        background: #f8f9fa;
+        color: #212529;
+        font-weight: bold;
+        transition: all 0.125s ease-in 0s;
+        border-radius: 0.25rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+      }
     }
   }
 `;

@@ -189,13 +189,25 @@ instance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
+    const refreshToken = localStorage.getItem("refresh_token");
+    console.log("refreshToken", refreshToken);
+    const memberId = localStorage.getItem("member_id");
+    console.log("@@er", error, originalRequest);
+
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      const refreshToken = localStorage.getItem("refresh_token");
-      const memberId = localStorage.getItem("member_id");
+
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
-        { refreshToken, memberId }
+        { refreshToken, memberId },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            MemberId: memberId,
+            Authorization: `Bearer ${refreshToken}`,
+          },
+        }
       );
       const accessToken = response.data.access_token;
       localStorage.setItem("access_token", accessToken);
@@ -219,7 +231,15 @@ imginstance.interceptors.response.use(
       const memberId = localStorage.getItem("member_id");
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
-        { refreshToken, memberId }
+        { refreshToken, memberId },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            MemberId: memberId,
+            Authorization: `Bearer ${refreshToken}`,
+          },
+        }
       );
       const accessToken = response.data.access_token;
       localStorage.setItem("access_token", accessToken);

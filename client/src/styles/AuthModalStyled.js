@@ -52,7 +52,7 @@ export const FormStyle = styled.form`
     padding: 0 10px;
     background-color: #fff;
     cursor: pointer;
-    background-color: green;
+    background-color: #218c74;
     color: #fff;
   }
 `;

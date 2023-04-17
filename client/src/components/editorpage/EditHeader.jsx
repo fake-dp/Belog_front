@@ -9,27 +9,46 @@ const EditHeader = ({ title, setTitle, category, setCategory }) => {
 
   return (
     <>
-      <InputTitle
-        type="text"
-        value={title}
-        onChange={onChangetitle}
-        placeholder="제목을 입력해주세요."
-      />
+      <TitleWrapper>
+        <TextTitle
+          type="text"
+          value={title}
+          onChange={onChangetitle}
+          placeholder="제목을 입력해주세요."
+        />
+        <LineTitle></LineTitle>
+      </TitleWrapper>
     </>
   );
 };
 
 export default EditHeader;
 
-const InputTitle = styled.input`
+const TitleWrapper = styled.div`
+  margin-top: 5rem;
+  margin-left: 3rem;
+`;
+
+const TextTitle = styled.textarea`
+  background: transparent;
+  display: block;
+  padding: 0px;
+  font-size: 1.8rem;
   width: 100%;
-  height: 50px;
-  border: none;
-  /* border-bottom: 1px solid #000; */
-  font-size: 20px;
-  font-weight: 600;
+  height: 43px;
+  resize: none;
+  line-height: 1.5;
   outline: none;
-  padding: 10px;
-  /* margin-top: 20px; */
-  background-color: #f7f1e3;
+  border: none;
+  font-weight: bold;
+  color: #212529;
+`;
+
+const LineTitle = styled.div`
+  background: rgb(73, 80, 87);
+  height: 6px;
+  width: 4rem;
+  margin-top: 1.2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1px;
 `;
