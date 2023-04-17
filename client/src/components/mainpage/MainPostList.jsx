@@ -5,6 +5,9 @@ import { useRecoilState } from "recoil";
 import * as S from "../../styles/mainpage/MainStyled";
 import getPost from "../../api/getpostApi";
 
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+
 const MainPostList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [postList, setPostList] = useRecoilState(PostListState);
@@ -66,7 +69,12 @@ const MainPostList = () => {
             </div>
           ))}
         </S.PostGridBox>
-        <div ref={intersectingRef}>IsLoading...</div>
+        <div ref={intersectingRef}>
+          {/* <Box sx={{ width: "100%" }}>
+            <LinearProgress />
+          </Box> */}
+          {/* Lodding... */}
+        </div>
       </S.MainListFlexWrapper>
     </S.MainListWrapper>
   );

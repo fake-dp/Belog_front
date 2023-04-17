@@ -35,8 +35,8 @@ const EditMarkdown = () => {
         contents,
         images,
       });
-
-      navigate("/");
+      swal("글이 등록되었습니다.");
+      window.location.href = "/";
     } catch (error) {
       console.log(error);
     }
