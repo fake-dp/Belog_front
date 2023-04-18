@@ -20,7 +20,7 @@ const SettingList = ({ info, setInfo }) => {
   const deleteMemberBtn = async () => {
     try {
       const { data } = await mypageApi.deleteMember();
-      console.log(data);
+      // console.log(data);
       swal({
         title: "회원탈퇴가 완료되었습니다.",
         icon: "success",

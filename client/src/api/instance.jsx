@@ -190,9 +190,9 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     const refreshToken = localStorage.getItem("refresh_token");
-    console.log("refreshToken", refreshToken);
+    // console.log("refreshToken", refreshToken);
     const memberId = localStorage.getItem("member_id");
-    console.log("@@er", error, originalRequest);
+    // console.log("@@er", error, originalRequest);
 
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;

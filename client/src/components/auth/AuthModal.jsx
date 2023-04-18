@@ -13,7 +13,7 @@ const AuthModal = ({ setShowModal }) => {
   const [newAccount, setNewAccount] = useState(false);
 
   const [isLogin, setIsLogin] = useRecoilState(loginState);
-  console.log(newAccount);
+  // console.log(newAccount);
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -41,7 +41,7 @@ const AuthModal = ({ setShowModal }) => {
         })
         .then((response) => {
           const { data } = response;
-          console.log(data);
+          // console.log(data);
           swal(data.result.status, data.result.message, "success");
           setNewAccount(false);
         })
@@ -57,7 +57,7 @@ const AuthModal = ({ setShowModal }) => {
         })
         .then((response) => {
           const { data } = response;
-          console.log(data);
+          // console.log(data);
           localStorage.setItem("access_token", data.body.accessToken);
           localStorage.setItem("member_id", data.body.memberId);
           // 리프레쉬 토큰

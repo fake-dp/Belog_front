@@ -5,9 +5,9 @@ import { MarkdownState } from "../../recoil/atom";
 import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 const DetailHeader = ({ detail }) => {
-  console.log(detail?.contents);
+  // console.log(detail?.contents);
   const markdown = useRecoilValue(MarkdownState);
-  console.log("markdown", markdown);
+  // console.log("markdown", markdown);
 
   return (
     <DetailHeaderWrapper>

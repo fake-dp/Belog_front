@@ -49,7 +49,7 @@ const Header = () => {
   const logoutBtn = async () => {
     try {
       const { data } = await authApi.logout(isLogin.memberId);
-      console.log(data);
+      // console.log(data);
       localStorage.removeItem("token");
       localStorage.removeItem("member_id");
       localStorage.removeItem("access_token");
@@ -75,7 +75,7 @@ const Header = () => {
         <Search />
         {isLogin.isLogin ? (
           <>
-            <WritePtag onClick={goEditPage}>새 글 작성</WritePtag>
+            <CustomBtn onClick={goEditPage}>새 글 작성</CustomBtn>
             <InfoRound
               src="https://placeimg.com/200/200/people"
               onClick={toggleMyInfo}
@@ -91,7 +91,7 @@ const Header = () => {
             )}
           </>
         ) : (
-          <p onClick={() => setShowModal(true)}>Login</p>
+          <CustomBtn onClick={() => setShowModal(true)}>Login</CustomBtn>
         )}
       </HeaderRight>
       {showModal && <AuthModal setShowModal={setShowModal} />}
@@ -138,7 +138,7 @@ const LinkStyle = styled(Link)`
   font-weight: 600;
 `;
 
-const WritePtag = styled.button`
+const CustomBtn = styled.button`
   height: 2rem;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -175,7 +175,6 @@ const InfoRound = styled.img`
 `;
 
 const InfoMenuWrapper = styled.div`
-  background-color: red;
   position: relative;
   margin-top: 1rem;
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Introduction = ({ info }) => {
-  console.log("!@#!@#", info);
+  // console.log("!@#!@#", info);
   return (
     <div>
       {info?.introduce === null ? (

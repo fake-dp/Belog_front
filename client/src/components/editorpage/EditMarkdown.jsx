@@ -24,7 +24,7 @@ const EditMarkdown = () => {
 
   const onChange = () => {
     const data = editorRef.current.getInstance().getMarkdown();
-    console.log(data);
+    // console.log(data);
     setcontents(data);
   };
 
@@ -56,7 +56,7 @@ const EditMarkdown = () => {
     }
   };
 
-  console.log("images", images);
+  // console.log("images", images);
 
   const goBack = () => {
     navigate("/");

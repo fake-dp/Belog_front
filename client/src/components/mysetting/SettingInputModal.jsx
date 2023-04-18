@@ -17,7 +17,7 @@ export const EditNickNameModalInput = ({
   };
 
   const onClickEditNickName = async () => {
-    console.log("닉네임 변경");
+    // console.log("닉네임 변경");
     const nick = {
       nickName: nickName,
     };
@@ -61,7 +61,7 @@ export const EditPasswordModalInput = ({ setPasswordInputSHowModal }) => {
   };
 
   const onClickEditPassword = async () => {
-    console.log("비밀번호 변경");
+    // console.log("비밀번호 변경");
     const passwordData = {
       password: password,
     };
@@ -102,7 +102,7 @@ export const EditIntroModalInput = ({ setShowIntroModal, setInfo, info }) => {
   };
 
   const onClickEditIntro = async () => {
-    console.log("자기소개 변경");
+    // console.log("자기소개 변경");
     const introData = {
       introduce: introText,
     };
@@ -115,7 +115,7 @@ export const EditIntroModalInput = ({ setShowIntroModal, setInfo, info }) => {
         introduce: introText,
       });
       setShowIntroModal(false);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }

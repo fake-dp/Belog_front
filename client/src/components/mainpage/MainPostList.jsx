@@ -20,8 +20,8 @@ const MainPostList = () => {
     try {
       const { data } = await getPost.getPostList(nextCursor);
       const { body } = data;
-      console.log("데이터 호출 확인용!", body);
-      console.log("postList", postList);
+      // console.log("데이터 호출 확인용!", body);
+      // console.log("postList", postList);
       setNextCursor(body.nextCursor.key);
       setPostList((prevData) => [...prevData, ...body.items]);
       setIsLoading(false);

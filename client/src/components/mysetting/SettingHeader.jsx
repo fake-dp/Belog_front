@@ -14,7 +14,7 @@ const SettingHeader = ({ info, setInfo }) => {
     const formData = new FormData();
     // formData.append("file", file);
     const imgdata = formData.append("image", file);
-    console.log("imgdata", imgdata);
+    // console.log("imgdata", imgdata);
     try {
       // const data = await mypageApi.uploadProfile();
     } catch (error) {
@@ -26,7 +26,7 @@ const SettingHeader = ({ info, setInfo }) => {
     setShowIntroModal(true);
   };
 
-  console.log("info", info);
+  // console.log("info", info);
 
   return (
     <>
