@@ -25,7 +25,6 @@ const EditHeader = ({ title, setTitle, category, setCategory }) => {
 export default EditHeader;
 
 const TitleWrapper = styled.div`
-  margin-top: 5rem;
   margin-left: 3rem;
 `;
 

@@ -1,18 +1,11 @@
 import axios from "axios";
 
+// basic axios instance
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
-  },
-});
-
-export const imginstance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "multipart/form-data",
   },
 });
 
@@ -23,9 +16,57 @@ instance.interceptors.request.use((config) => {
   if (accessToken && config.headers) {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
     config.headers["MemberId"] = memberId;
-    config.headers["RefreshToken"] = refreshToken;
+    config.headers["refreshtoken"] = refreshToken;
   }
+
   return config;
+});
+
+instance.interceptors.response.use(
+  (response) => {
+    console.log(response, "@@@response");
+    return response;
+  },
+  async (error) => {
+    console.log("error", error);
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem("refresh_token");
+      console.log(refreshToken, "refreshToken");
+      const memberId = localStorage.getItem("member_id");
+      const accessToken = localStorage.getItem("access_token");
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            MemberId: memberId,
+            refreshtoken: refreshToken,
+          },
+        }
+      );
+      console.log(response, "response");
+      const newAccessToken = response.data.body.accessToken;
+      localStorage.setItem("access_token", newAccessToken);
+
+      originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+      originalRequest.headers["MemberId"] = memberId;
+      originalRequest.headers["refreshtoken"] = refreshToken;
+      return instance(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
+
+// img axios instance
+export const imginstance = axios.create({
+  baseURL: process.env.REACT_APP_SERVER,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "multipart/form-data",
+  },
 });
 
 imginstance.interceptors.request.use((config) => {
@@ -35,54 +76,41 @@ imginstance.interceptors.request.use((config) => {
   if (accessToken && config.headers) {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
     config.headers["MemberId"] = memberId;
-    config.headers["RefreshToken"] = refreshToken;
+    config.headers["refreshtoken"] = refreshToken;
   }
   return config;
 });
-
-instance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      const refreshToken = localStorage.getItem("refresh_token");
-      const memberId = localStorage.getItem("member_id");
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
-        { refreshToken, memberId }
-      );
-      const accessToken = response.data.access_token;
-      localStorage.setItem("access_token", accessToken);
-      originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
-      originalRequest.headers["MemberId"] = memberId;
-
-      return instance(originalRequest);
-    }
-    return Promise.reject(error);
-  }
-);
 
 imginstance.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
+    console.log("error", error);
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem("refresh_token");
       const memberId = localStorage.getItem("member_id");
+      const accessToken = localStorage.getItem("access_token");
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
-        { refreshToken, memberId }
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            MemberId: memberId,
+            refreshtoken: refreshToken,
+          },
+        }
       );
-      const accessToken = response.data.access_token;
-      localStorage.setItem("access_token", accessToken);
-      originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+      console.log(response, "response");
+      const newAccessToken = response.data.body.accessToken;
+      localStorage.setItem("access_token", newAccessToken);
+
+      originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
       originalRequest.headers["MemberId"] = memberId;
+      originalRequest.headers["refreshtoken"] = refreshToken;
       return imginstance(originalRequest);
     }
     return Promise.reject(error);

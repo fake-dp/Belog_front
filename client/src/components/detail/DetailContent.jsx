@@ -7,7 +7,6 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 const DetailHeader = ({ detail }) => {
   // console.log(detail?.contents);
   const markdown = useRecoilValue(MarkdownState);
-  // console.log("markdown", markdown);
 
   return (
     <DetailHeaderWrapper>
@@ -40,6 +39,27 @@ export const DetailHeaderWrapper = styled.div`
   /* medie 쿼리  */
   @media (max-width: 768px) {
     width: 100%;
+  }
+  .toastui-editor-contents p {
+    font-size: 18px;
+  }
+  .toastui-editor-contents h1 {
+    font-size: 36px;
+  }
+  .toastui-editor-contents h2 {
+    font-size: 30px;
+  }
+  .toastui-editor-contents h3 {
+    font-size: 24px;
+  }
+  .toastui-editor-contents h4 {
+    font-size: 20px;
+  }
+  .toastui-editor-contents h5 {
+    font-size: 18px;
+  }
+  .toastui-editor-contents h6 {
+    font-size: 16px;
   }
 `;
 

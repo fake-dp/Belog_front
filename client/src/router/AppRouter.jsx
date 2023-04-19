@@ -15,8 +15,8 @@ function AppRouter() {
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/setting" element={<SettingPage />} />
-        <Route path="/edit" element={<EditorPage />} />
       </Route>
+      <Route path="/edit" element={<EditorPage />} />
     </Routes>
   );
 }

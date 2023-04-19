@@ -69,7 +69,9 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <div>
-        <LinkStyle to="/">Dev Log</LinkStyle>
+        <LinkStyle to="/">
+          <img src="https://user-images.githubusercontent.com/75570030/232900117-c6bc308b-24b6-4769-b8b4-50f1a2ac7bd6.jpeg" />
+        </LinkStyle>
       </div>
       <HeaderRight>
         <Search />
@@ -136,6 +138,14 @@ const LinkStyle = styled(Link)`
   color: #212529;
   font-size: 20px;
   font-weight: 600;
+  position: relative;
+  > img {
+    position: absolute;
+    top: -30px;
+    width: 150px;
+    height: 60px;
+    object-fit: cover;
+  }
 `;
 
 const CustomBtn = styled.button`

@@ -13,6 +13,7 @@ import EditHeader from "./EditHeader";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { BiArrowBack } from "react-icons/bi";
+
 const EditMarkdown = () => {
   const editorRef = useRef();
   const [contents, setcontents] = useRecoilState(MarkdownState);
@@ -27,8 +28,13 @@ const EditMarkdown = () => {
     // console.log(data);
     setcontents(data);
   };
-
+  console.log("contents@@@", contents);
   const onSubmit = async () => {
+    if (!title) {
+      swal("제목을 입력해주세요.");
+      return;
+    }
+
     try {
       const data = await editApi.createPost({
         title,
@@ -40,6 +46,7 @@ const EditMarkdown = () => {
       window.location.href = "/";
     } catch (error) {
       console.log(error);
+      swal("글 등록에 실패했습니다.");
     }
   };
 
@@ -53,6 +60,7 @@ const EditMarkdown = () => {
       callback(imageUrl, "alt text");
     } catch (error) {
       console.log(error);
+      swal("이미지 업로드에 실패했습니다.");
     }
   };
 
@@ -80,6 +88,7 @@ const EditMarkdown = () => {
         ref={editorRef}
         language="ko-KR"
         onChange={onChange}
+        hideModeSwitch={true}
         hooks={{
           addImageBlobHook: onUploadImage,
         }}

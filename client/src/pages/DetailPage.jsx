@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 import { MarkdownState } from "../recoil/atom";
 import { useParams } from "react-router-dom";
 const DetailPage = () => {
-  const [markdown, setMarkdown] = useRecoilState(MarkdownState);
+  // const [markdown, setMarkdown] = useRecoilState(MarkdownState);
   const [detail, setDetail] = useState([]);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +21,7 @@ const DetailPage = () => {
         const { body } = data;
         const resultData = body;
         setDetail(resultData);
-        setMarkdown(resultData.contents);
+        // setMarkdown(resultData.contents);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
