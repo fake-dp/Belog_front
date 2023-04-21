@@ -34,7 +34,10 @@ const EditMarkdown = () => {
       swal("제목을 입력해주세요.");
       return;
     }
-
+    if (!contents) {
+      swal("컨텐츠 내용을 입력해주세요.");
+      return;
+    }
     try {
       const data = await editApi.createPost({
         title,
