@@ -43,7 +43,7 @@ instance.interceptors.response.use(
           headers: {
             Authorization: `Bearer ${accessToken}`,
             MemberId: memberId,
-            refreshtoken: refreshToken,
+            RefreshToken: refreshToken,
           },
         }
       );
@@ -100,7 +100,7 @@ imginstance.interceptors.response.use(
           headers: {
             Authorization: `Bearer ${accessToken}`,
             MemberId: memberId,
-            refreshtoken: refreshToken,
+            RefreshToken: refreshToken,
           },
         }
       );
