@@ -35,8 +35,8 @@ pipeline {
         // 2. 리액트 코드 빌드 및 테스트 진행
         stage('build') {
             steps {
-                sh 'npm ci'
-                sh "npm run build"
+            sh 'npm install --package-lock-only'
+            sh 'npm run build'
             }
         }
 
