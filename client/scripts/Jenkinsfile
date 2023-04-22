@@ -27,7 +27,7 @@ pipeline {
         stage('checkout') {
             steps {
                 git branch: 'master',
-                url: 'https://github.com/fake-dp/Belog_front/',
+                url: 'https://github.com/fake-dp/Belog_front',
                 credentialsId: 'github-fakedp'
             }
         }
