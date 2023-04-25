@@ -24,7 +24,7 @@ pipeline {
         // 1. GitHub에서 특정 브랜치의 코드 가져오기
         stage('checkout') {
             steps {
-                git branch: 'master',
+                git branch: 'main',
                 url: 'https://github.com/fake-dp/Belog_front',
                 credentialsId: 'github-fakedp'
             }
