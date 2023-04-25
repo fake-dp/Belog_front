@@ -2,7 +2,7 @@ import axios from "axios";
 
 // basic axios instance
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER,
+  baseURL: "http://3.39.159.26:8080",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -37,7 +37,7 @@ instance.interceptors.response.use(
       const memberId = localStorage.getItem("member_id");
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
+        `${"http://3.39.159.26:8080"}/auth-service/refresh-token`,
         {},
         {
           headers: {
@@ -62,7 +62,7 @@ instance.interceptors.response.use(
 
 // img axios instance
 export const imginstance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER,
+  baseURL: "http://3.39.159.26:8080",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "multipart/form-data",
@@ -94,7 +94,7 @@ imginstance.interceptors.response.use(
       const memberId = localStorage.getItem("member_id");
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
+        `${"http://3.39.159.26:8080"}/auth-service/refresh-token`,
         {},
         {
           headers: {
@@ -120,7 +120,7 @@ imginstance.interceptors.response.use(
 // import axios from "axios";
 
 // const baseConfig = {
-//   baseURL: process.env.REACT_APP_SERVER,
+//   baseURL: "http://3.39.159.26:8080",
 //   headers: {
 //     "Access-Control-Allow-Origin": "*",
 //     "Content-Type": "application/json",
@@ -150,7 +150,7 @@ imginstance.interceptors.response.use(
 //     const refreshToken = localStorage.getItem("refresh_token");
 //     const memberId = localStorage.getItem("member_id");
 //     const response = await axios.post(
-//       `${process.env.REACT_APP_SERVER}/auth-service/refresh-token`,
+//       `${"http://3.39.159.26:8080"}/auth-service/refresh-token`,
 //       { refreshToken, memberId }
 //     );
 //     const accessToken = response.data.access_token;

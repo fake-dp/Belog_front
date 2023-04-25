@@ -1,5 +1,5 @@
 import { imginstance, instance } from "./instance";
-const BASEURL = process.env.REACT_APP_SERVER;
+const BASEURL = "http://3.39.159.26:8080";
 
 const editApi = {
   uploadImg: async (formData) => {
