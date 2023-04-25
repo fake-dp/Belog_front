@@ -16,7 +16,7 @@ pipeline {
  
     environment {
         // 환경 변수 추가
-        DOCKERHUB_CREDENTIALS = credentials('docker-user')
+        DOCKERHUB_CREDENTIALS = credentials('docker-leejanghe')
     }
 
 
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 git branch: 'main',
                 url: 'https://github.com/fake-dp/Belog_front',
-                credentialsId: 'github-fake-dp'
+                credentialsId: 'github-fakedp'
             }
         }
 
