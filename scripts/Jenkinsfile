@@ -1,0 +1,62 @@
+// CI 작업
+// 1. git hub 접속해서 특정 브런치의 코드를 가져온다.
+// 2. 리액트 코드를 빌드 및 테스트 진행
+// 3. 도커 이미지 생성 (Dockerfile -> 도커 이미지화)
+
+// CD 작업
+// 4. 도커 허브에 이미지 푸쉬
+// 5. AWS Ec2에 SSH 접속 한 후 
+//   - 기존 도커 컨테이너가 실행 중인게 있으면 중지
+//   - 기존 도커 컨테이너 실행 중인게 있으면 삭제
+//   - 도커 이미지 삭제
+//   - 도커 이미지 pull 및 실행 (docker run ~)   
+
+pipeline {
+    agent any
+ 
+    environment {
+        // 환경 변수 추가
+        DOCKERHUB_CREDENTIALS = credentials('docker-user')
+    }
+
+
+    stages {
+        // 1. GitHub에서 특정 브랜치의 코드 가져오기
+        stage('checkout') {
+            steps {
+                git branch: 'master',
+                url: 'https://github.com/fake-dp/Belog_front',
+                credentialsId: 'github-fakedp'
+            }
+        }
+
+        // 2. 리액트 코드 빌드 및 테스트 진행
+        stage('build') {
+            steps {
+                   dir('client') {
+                    // install necessary packages
+                    sh 'npm install --package-lock-only'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        // 3. 도커 이미지 생성 및 Docker Hub에 푸시
+        stage('Dockerize') {
+            steps {
+                // 도커 이미지 빌드
+                sh 'docker build -t fake-dp/jenkins-depoly .'
+
+                // 도커 허브에 로그인
+                sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+
+                // 도커 이미지 푸시
+                sh 'docker push fake-dp/jenkins-depoly'
+
+                // 도커 이미지 삭제 (불필요한 파일 삭제)
+                sh 'docker rmi fake-dp/jenkins-depoly'
+            }
+        }
+        
+    }
+}
