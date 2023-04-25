@@ -28,5 +28,6 @@ yarn-error.log*
 # Except for the 'client' directory
 !/client/
 
-# Ignore all files in the 'client' directory
-/client/*
+# Ignore everything in the 'src' directory, except for its subdirectories
+/client/src/*
+!/client/src/**/
