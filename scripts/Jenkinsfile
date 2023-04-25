@@ -33,8 +33,7 @@ pipeline {
         // // 2. 리액트 코드 빌드 및 테스트 진행
         stage('build') {
             steps {
-                    sh 'npm install @toast-ui/react-editor --force'
-                    sh 'npm audit fix --force'
+                    sh 'npm install'
                     sh 'npm run build'
                 }
         }
