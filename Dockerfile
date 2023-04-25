@@ -8,7 +8,7 @@ WORKDIR /app
 COPY .. /app
 
 # 애플리케이션 빌드
-RUN npm run build
+# RUN npm run build
 
 # 컨테이너가 시작되었을 때 실행할 명령어를 설정합니다.
 CMD ["npm", "start"]
