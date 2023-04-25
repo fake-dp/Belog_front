@@ -26,7 +26,7 @@ pipeline {
             steps {
                 git branch: 'main',
                 url: 'https://github.com/fake-dp/Belog_front',
-                credentialsId: 'github-fakedp'
+                credentialsId: 'github-fake-dp'
             }
         }
 
