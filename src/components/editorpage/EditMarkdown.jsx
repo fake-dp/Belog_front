@@ -28,7 +28,7 @@ const EditMarkdown = () => {
     // console.log(data);
     setcontents(data);
   };
-  console.log("contents@@@", contents);
+  // console.log("contents@@@", contents);
   const onSubmit = async () => {
     if (!title) {
       swal("제목을 입력해주세요.");

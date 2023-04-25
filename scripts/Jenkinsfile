@@ -34,6 +34,7 @@ pipeline {
         stage('build') {
             steps {
                     sh 'npm install @toast-ui/react-editor --force'
+                    sh 'npm audit fix --force'
                     sh 'npm run build'
                 }
         }
