@@ -33,12 +33,9 @@ pipeline {
         // 2. 리액트 코드 빌드 및 테스트 진행
         stage('build') {
             steps {
-                   dir('client') {
-                    // install necessary packages
                     sh 'npm install --package-lock-only'
                     sh 'npm run build'
                 }
-            }
         }
 
         // 3. 도커 이미지 생성 및 Docker Hub에 푸시
