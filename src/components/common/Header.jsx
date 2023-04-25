@@ -48,7 +48,7 @@ const Header = () => {
 
   const logoutBtn = async () => {
     try {
-      const { data } = await authApi.logout(isLogin.memberId);
+      await authApi.logout(isLogin.memberId);
       // console.log(data);
       localStorage.removeItem("token");
       localStorage.removeItem("member_id");
@@ -70,7 +70,10 @@ const Header = () => {
     <HeaderWrapper>
       <div>
         <LinkStyle to="/">
-          <img src="https://user-images.githubusercontent.com/75570030/232900117-c6bc308b-24b6-4769-b8b4-50f1a2ac7bd6.jpeg" />
+          <img
+            src="https://user-images.githubusercontent.com/75570030/232900117-c6bc308b-24b6-4769-b8b4-50f1a2ac7bd6.jpeg"
+            alt="logo"
+          />
         </LinkStyle>
       </div>
       <HeaderRight>

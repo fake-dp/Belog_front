@@ -4,9 +4,6 @@ import MainListCard from "./MainListCard";
 import { useRecoilState } from "recoil";
 import * as S from "../../styles/mainpage/MainStyled";
 import getPost from "../../api/getpostApi";
-
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
 import MainHeader from "./MainHeader";
 
 const MainPostList = () => {

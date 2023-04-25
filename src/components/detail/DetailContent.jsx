@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import { MarkdownState } from "../../recoil/atom";
 import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 const DetailHeader = ({ detail }) => {

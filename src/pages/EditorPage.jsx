@@ -1,5 +1,4 @@
 import React from "react";
-import EditHeader from "../components/editorpage/EditHeader";
 import EditMarkdown from "../components/editorpage/EditMarkdown";
 
 import { LayoutMargin } from "../styles/common/LayoutMarginStyled";

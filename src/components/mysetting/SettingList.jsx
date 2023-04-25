@@ -15,11 +15,11 @@ const SettingList = ({ info, setInfo }) => {
   const navigate = useNavigate();
   const [nickNameInputShowModal, setNickNameInputShowModal] = useState(false);
   const [passwordInputSHowModal, setPasswordInputSHowModal] = useState(false);
-  const [isLogin, setIsLogin] = useRecoilState(loginState);
+  const [setIsLogin] = useRecoilState(loginState);
 
   const deleteMemberBtn = async () => {
     try {
-      const { data } = await mypageApi.deleteMember();
+      await mypageApi.deleteMember();
       // console.log(data);
       swal({
         title: "회원탈퇴가 완료되었습니다.",

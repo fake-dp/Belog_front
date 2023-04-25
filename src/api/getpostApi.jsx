@@ -1,5 +1,5 @@
 import axios from "axios";
-import { imginstance } from "./instance";
+
 const BASEURL = process.env.REACT_APP_SERVER;
 
 const getPost = {

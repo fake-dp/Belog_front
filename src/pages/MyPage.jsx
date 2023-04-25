@@ -1,10 +1,5 @@
-import MyInfoHeader from "../components/mypage/MyInfoHeader";
-import SideTab from "../components/mypage/SideTab";
 import { LayoutMargin } from "../styles/common/LayoutMarginStyled";
-import mypageApi from "../api/mypageApi";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { MyInfoState } from "../recoil/atom";
+
 import UseIsLogin from "../hook/UseIsLogin";
 import styled from "styled-components";
 const MyPage = () => {

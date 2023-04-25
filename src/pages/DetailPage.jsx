@@ -5,8 +5,7 @@ import getPost from "../api/getpostApi";
 import DetailContent from "../components/detail/DetailContent";
 
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
-import { MarkdownState } from "../recoil/atom";
+
 import { useParams } from "react-router-dom";
 const DetailPage = () => {
   // const [markdown, setMarkdown] = useRecoilState(MarkdownState);
@@ -28,7 +27,7 @@ const DetailPage = () => {
       }
     };
     getPostDetail();
-  }, []);
+  }, [id]);
 
   return (
     <LayoutMargin>

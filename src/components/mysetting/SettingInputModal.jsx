@@ -22,7 +22,7 @@ export const EditNickNameModalInput = ({
       nickName: nickName,
     };
     try {
-      const data = await mypageApi.editInfo(nick);
+      await mypageApi.editInfo(nick);
       setInfo({
         ...info,
         nickName: nickName,
@@ -67,7 +67,7 @@ export const EditPasswordModalInput = ({ setPasswordInputSHowModal }) => {
     };
 
     try {
-      const data = await mypageApi.editPassword(passwordData);
+      await mypageApi.editPassword(passwordData);
       swal("비밀번호 변경", "비밀번호가 변경되었습니다.", "success");
       setPasswordInputSHowModal(false);
     } catch (error) {
@@ -108,7 +108,7 @@ export const EditIntroModalInput = ({ setShowIntroModal, setInfo, info }) => {
     };
 
     try {
-      const data = await mypageApi.editIntroduce(introData);
+      await mypageApi.editIntroduce(introData);
       swal("자기소개 변경", "자기소개가 변경되었습니다.", "success");
       setInfo({
         ...info,

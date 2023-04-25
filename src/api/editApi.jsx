@@ -1,4 +1,3 @@
-import axios from "axios";
 import { imginstance, instance } from "./instance";
 const BASEURL = process.env.REACT_APP_SERVER;
 

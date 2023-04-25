@@ -12,7 +12,7 @@ const AuthModal = ({ setShowModal }) => {
   const [nickName, setnickName] = useState("");
   const [newAccount, setNewAccount] = useState(false);
 
-  const [isLogin, setIsLogin] = useRecoilState(loginState);
+  const [_, setIsLogin] = useRecoilState(loginState);
   // console.log(newAccount);
   const onChange = (event) => {
     const {
@@ -33,7 +33,7 @@ const AuthModal = ({ setShowModal }) => {
     event.preventDefault();
 
     if (newAccount) {
-      const data = await authApi
+      await authApi
         .register({
           email,
           password,
@@ -50,7 +50,7 @@ const AuthModal = ({ setShowModal }) => {
           swal(data.result.status, data.result.message, "error");
         });
     } else {
-      const data = await authApi
+      await authApi
         .login({
           email,
           password,
